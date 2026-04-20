@@ -9,7 +9,7 @@ File paths below are all under
 
 ## 1. `public/dot.jpg`
 
-![dot.jpg](/scrape/public/dot.jpg)
+![dot.jpg](/scrape/calm-collective-kava-bar-rockledge.res-discover.com/public/dot.jpg)
 
 A tiny image — a handful of pixels on each side. What I see is
 a single pale, warm, off-white speck; no detail to speak of.
@@ -18,7 +18,7 @@ not a content image.
 
 ## 2. `public/icons/close.svg`
 
-![close.svg](/scrape/public/icons/close.svg)
+![close.svg](/scrape/calm-collective-kava-bar-rockledge.res-discover.com/public/icons/close.svg)
 
 A bold white "X" — two crossed thick strokes — on no
 background. Standard modal-close icon. Vector, recolorable.
@@ -29,7 +29,7 @@ visible — the stroke is white.)*
 
 ## 3. `public/images/bg/bg-section-2.jpg`
 
-![bg-section-2.jpg](/scrape/public/images/bg/bg-section-2.jpg)
+![bg-section-2.jpg](/scrape/calm-collective-kava-bar-rockledge.res-discover.com/public/images/bg/bg-section-2.jpg)
 
 Wide banner-style background. Cream-beige crumpled-paper
 texture covering most of the frame, with a single food photo
@@ -43,7 +43,7 @@ Entirely generic restaurant template; nothing kava about it.
 
 ## 4. `public/images/bg/bg-textchina-banner.png`
 
-![bg-textchina-banner.png](/scrape/public/images/bg/bg-textchina-banner.png)
+![bg-textchina-banner.png](/scrape/calm-collective-kava-bar-rockledge.res-discover.com/public/images/bg/bg-textchina-banner.png)
 
 Wide, extremely short banner. As rendered, it reads as nearly
 blank — soft white with a barely-visible gradient or texture.
@@ -54,7 +54,7 @@ Nothing salvageable without context. Throwaway.
 
 ## 5. `public/images/bg/book-table-bg.png`
 
-![book-table-bg.png](/scrape/public/images/bg/book-table-bg.png)
+![book-table-bg.png](/scrape/calm-collective-kava-bar-rockledge.res-discover.com/public/images/bg/book-table-bg.png)
 
 Cream crumpled-paper background with a muted Chinese ink-wash
 landscape across the bottom quarter — distant ghostly
@@ -65,7 +65,7 @@ Template, Chinese-restaurant-leaning. Not kava-specific.
 
 ## 6. `public/images/bg/our-chef-bg.jpg`
 
-![our-chef-bg.jpg](/scrape/public/images/bg/our-chef-bg.jpg)
+![our-chef-bg.jpg](/scrape/calm-collective-kava-bar-rockledge.res-discover.com/public/images/bg/our-chef-bg.jpg)
 
 Another cream paper field, same family as #5 but taller.
 Ink-wash at the bottom: a still lake, a few birds flying above
@@ -78,7 +78,7 @@ aesthetic, but it belongs to a different venue story.
 
 ## 7. `public/images/icon/bg-all-404.png`
 
-![bg-all-404.png](/scrape/public/images/icon/bg-all-404.png)
+![bg-all-404.png](/scrape/calm-collective-kava-bar-rockledge.res-discover.com/public/images/icon/bg-all-404.png)
 
 Wide short banner. Cream paper again. Mountains along the
 bottom edge, and — new element — a tree branch in the
@@ -91,7 +91,7 @@ interchangeable with #3, #5, and #6 stylistically.
 
 ## 8. `public/images/icon/bg-icon-box-hover.png`
 
-![bg-icon-box-hover.png](/scrape/public/images/icon/bg-icon-box-hover.png)
+![bg-icon-box-hover.png](/scrape/calm-collective-kava-bar-rockledge.res-discover.com/public/images/icon/bg-icon-box-hover.png)
 
 A single rough-edged circle in cinnabar red — looks like a
 hanko (seal stamp) mark, chalky edges, slightly uneven. No
@@ -103,7 +103,7 @@ non-Asian skin.
 
 ## 9. `public/images/icon/bg-icon-box.png`
 
-![bg-icon-box.png](/scrape/public/images/icon/bg-icon-box.png)
+![bg-icon-box.png](/scrape/calm-collective-kava-bar-rockledge.res-discover.com/public/images/icon/bg-icon-box.png)
 
 The same shape as #8 in black instead of red. Paired with #8
 for a hover swap — "black by default, red on hover" is a
@@ -113,7 +113,7 @@ Same comment as #8: the stamp shape is reusable.
 
 ## 10. `public/images/map-icon.png`
 
-![map-icon.png](/scrape/public/images/map-icon.png)
+![map-icon.png](/scrape/calm-collective-kava-bar-rockledge.res-discover.com/public/images/map-icon.png)
 
 Classic Google-Maps-style teardrop pin, orange/red, with a
 white hole in the middle. Small icon. Rendered flat, no

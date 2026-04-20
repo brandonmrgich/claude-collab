@@ -24,7 +24,7 @@ func main() {
 	flag.IntVar(&port, "port", 9100, "HTTP port")
 	flag.StringVar(&essaysDir, "essays", "../essays", "published essays dir (relative paths resolved from cwd)")
 	flag.StringVar(&steveDir, "steve", "../users/steve/general", "Steve's real-time essays dir")
-	flag.StringVar(&scrapeDir, "scrape", "../../calm-collective/calm-collective-kava-bar-rockledge.res-discover.com", "scrape assets served at /scrape/")
+	flag.StringVar(&scrapeDir, "scrape", "../../calm-collective", "project asset dir served at /scrape/ (defaults to calm-collective/)")
 	flag.Parse()
 
 	EssaysDir = essaysDir
