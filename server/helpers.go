@@ -25,6 +25,7 @@ ul.essays a:hover { text-decoration: underline; }
 .wiki-md { margin-top: 24px; }
 .wiki-md h2 { margin-top: 28px; }
 .wiki-md blockquote { margin: 0 0 16px; padding: 0 14px; color: #555; border-left: 3px solid #d6d0be; }
+.wiki-md img { max-width: 100%; height: auto; border: 1px solid #e6e0d0; border-radius: 3px; margin: 8px 0; }
 `
 
 func pageHead(title string) string {

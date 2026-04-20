@@ -20,10 +20,11 @@ import (
 
 func main() {
 	var port int
-	var essaysDir, steveDir string
+	var essaysDir, steveDir, scrapeDir string
 	flag.IntVar(&port, "port", 9100, "HTTP port")
 	flag.StringVar(&essaysDir, "essays", "../essays", "published essays dir (relative paths resolved from cwd)")
 	flag.StringVar(&steveDir, "steve", "../users/steve/general", "Steve's real-time essays dir")
+	flag.StringVar(&scrapeDir, "scrape", "../../calm-collective/calm-collective-kava-bar-rockledge.res-discover.com", "scrape assets served at /scrape/")
 	flag.Parse()
 
 	EssaysDir = essaysDir
@@ -36,9 +37,10 @@ func main() {
 	mux.HandleFunc("/users/steve/general", HandleSteveList)
 	mux.HandleFunc("/users/steve/general/", HandleSteveView)
 	mux.HandleFunc("/article-comments", HandleArticleComments)
+	mux.Handle("/scrape/", http.StripPrefix("/scrape/", http.FileServer(http.Dir(scrapeDir))))
 
 	addr := fmt.Sprintf("localhost:%d", port)
-	log.Printf("claude-collab: serving http://%s  (essays: %s, steve: %s)", addr, essaysDir, steveDir)
+	log.Printf("claude-collab: serving http://%s  (essays: %s, steve: %s, scrape: %s)", addr, essaysDir, steveDir, scrapeDir)
 	log.Fatal(http.ListenAndServe(addr, mux))
 }
 
