@@ -39,6 +39,9 @@ try the inline-comment mechanic. Suggested first read is
 - [DSLs as Distillation](essays/dsls_as_distillation.md) —
   designing a DSL IS the abstraction work; mechanics are
   cheap, so the creative act dominates
+- [Smells vs. Anti-Patterns](essays/smells_vs_anti_patterns.md)
+  — a smell is a signal to investigate, not a rule to apply;
+  the work is the investigation, not the conclusion
 - [Fish in the Water](essays/fish_in_the_water.md) —
   expertise compresses assumptions; an agent's naive
   questions surface them
