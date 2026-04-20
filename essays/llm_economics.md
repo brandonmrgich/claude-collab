@@ -1,0 +1,117 @@
+# LLM Economics
+
+Before LLMs, one of the sharper paradigm shifts in software
+engineering came from test-suite speed. If your tests took
+50 seconds, you ran them on a schedule — after a batch of
+changes, in CI, at end of day. If they took 1 second, you
+ran them after every save. The difference wasn't linear.
+Somewhere between those numbers a threshold got crossed, and
+the entire workflow flipped: feedback-driven development
+stopped being a ceremony and became an ambient condition.
+
+The 50x speedup isn't what mattered. Dropping below the
+threshold where the cost stopped interrupting flow is what
+mattered.
+
+LLMs are doing this, simultaneously, for about a dozen costs
+in software engineering. That's the shift worth naming.
+
+## The operations that dropped below threshold
+
+Writing a small parser: was days, now minutes.
+
+Producing a code generator: was a project, now a background
+task.
+
+Reading a 10,000-line codebase to find how a specific flow
+works: was hours of focused attention, now a conversation.
+
+Refactoring across multiple files: was risky manual work,
+now mechanical.
+
+Writing a first-draft essay or a decision doc: was a
+half-day effort, now thirty minutes.
+
+Generating test fixtures for an unfamiliar schema: was
+annoying boilerplate, now free.
+
+Maintaining per-file sidecar documentation as code changes:
+was impossible in practice (nobody does it), now routine.
+
+Each of these costs crossed a threshold. Taken individually,
+each is a modest improvement. Taken together, they compound.
+
+## Why compounding matters
+
+When one operation drops below its threshold, you do more of
+that operation. Run tests more often. Refactor more freely.
+That's linear.
+
+When *many* operations drop below threshold at once, the
+workflow changes qualitatively. You can refactor a design,
+*then* write a DSL for the abstraction you discovered,
+*then* rip the old code it's replacing, *then* update the
+docs and sidecars — all in one session, because each
+individual step is now below the interrupt-flow threshold.
+Previously this sequence was a multi-sprint project; now
+it's an afternoon.
+
+The compound effect enables workflows that were foreclosed
+by the old cost structure. "Design a throwaway DSL to
+sharpen your thinking" used to be absurd advice — the
+plumbing made every DSL a commitment. Now it's a ten-minute
+move. "Rip this subsystem and rebuild it cleaner" used to
+require political capital; now the rip is cheaper than the
+maintenance.
+
+## The implication
+
+Every assumption about what's expensive is potentially
+stale.
+
+Before LLMs, if someone said "let's generate per-file
+documentation that stays current with the code," the honest
+answer was "nobody maintains that; it'll drift in a week."
+The economics made it impossible. After LLMs, the same
+suggestion is reasonable. The economics changed.
+
+Most software engineering intuition is built from pre-LLM
+cost structures. You probably still have a reflex that says
+certain things are too expensive to do — speculative DSLs,
+aggressive refactors, comprehensive docs, thorough
+exploration of alternative designs. The reflex was
+calibrated against a cost structure that no longer applies.
+
+The tactical move: when you find yourself flinching at an
+idea because it "would be too much work," ask specifically
+*how much work*, and whether your estimate was built on
+pre-LLM intuitions. Often the answer is "less work than I
+think, by a factor that crosses a threshold."
+
+## What the compounding doesn't touch
+
+Not everything gets cheaper. Judgment still costs what it
+always cost. Deciding *which* refactor to do, *which* DSL
+to design, *which* subsystem to rip — those decisions still
+require a human who's been close to the problem. The agent
+can execute any of them; the agent can't want any of them
+more than any other.
+
+The compounding frees up attention for judgment. What used
+to be 80% mechanics and 20% judgment is now 20% mechanics
+and 80% judgment. That's a good thing — judgment is where
+the interesting work was all along — but it also means the
+bottleneck hasn't gone away. It's just been relocated.
+
+## A running check
+
+Next time you have an idea and immediately discard it as
+"too much work," stop and list what actually has to happen.
+For each step, ask: was this expensive before LLMs? Is it
+still expensive now?
+
+If many of the steps crossed a threshold, the idea is
+probably cheaper than your reflex says. Consider trying it.
+Compounding is how you end up doing things that were
+impossible last year while not noticing you've done anything
+unusual.

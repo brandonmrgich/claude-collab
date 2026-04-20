@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "para_index": 1,
+      "author": "example-reader",
+      "timestamp": "2026-04-20T23:20:00Z",
+      "text": "The threshold-not-speedup distinction is the key claim. 50x faster that stays ABOVE threshold doesn't change behavior; 2x faster that crosses threshold does. Most 'X times faster' claims don't specify which side of the threshold they land on."
+    },
+    {
+      "para_index": 12,
+      "author": "example-reader",
+      "timestamp": "2026-04-20T23:23:00Z",
+      "text": "Refactor → DSL → rip → docs, all in one session. That's the shape of the qualitative shift. Reading this paragraph, I recognized sessions I've had in the last week that followed exactly this pattern — I hadn't named the shape yet."
+    },
+    {
+      "para_index": 20,
+      "author": "example-reader",
+      "timestamp": "2026-04-20T23:26:00Z",
+      "text": "'The bottleneck has been relocated' is the important hedge. Removes the triumphalism without undercutting the thesis. Judgment was always the real work; now you have to do more of it per unit time."
+    }
+  ]
+}
