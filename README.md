@@ -36,6 +36,9 @@ try the inline-comment mechanic. Suggested first read is
   zoom-out rhythm; announce mode transitions
 - [Where to Put the Files](essays/where_to_put_the_files.md)
   — agents aren't configured; they're asked
+- [DSLs as Distillation](essays/dsls_as_distillation.md) —
+  designing a DSL IS the abstraction work; mechanics are
+  cheap, so the creative act dominates
 - [Fish in the Water](essays/fish_in_the_water.md) —
   expertise compresses assumptions; an agent's naive
   questions surface them
