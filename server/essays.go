@@ -86,7 +86,10 @@ func HandleEssayView(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, `<div class="wiki-md">`)
 	fmt.Fprint(w, renderMarkdown(string(body)))
 	fmt.Fprint(w, `</div>`)
-	fmt.Fprint(w, ArticleCommentsJS)
+	// ArticleCommentsJS injection disabled — the inline-note UI
+	// was the demo surface for the reply-to-essay feature, which
+	// is documented elsewhere. The code in article_comments.go
+	// stays available for anyone who wants to re-enable it.
 	fmt.Fprint(w, pageFoot())
 }
 
