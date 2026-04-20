@@ -1,13 +1,12 @@
 # Inclinations, Not Deficits
 
-The commonplace advice for human-agent collaboration is to
-play to each party's strengths. Route tedious work to the
-agent, judgment calls to the human, and everyone comes out
-ahead. The advice is reasonable. But there's a nuance
-underneath it that gets less attention: the division of
-labor shouldn't rest on exaggerated accounts of the other
-party's weaknesses. Route work to where it costs less, not
-to where the alternative is imagined as broken.
+Play to each party's strengths. Route tedious work to the
+agent, judgment calls to the human. Standard advice, and
+it's right — as far as it goes. There's a nuance underneath
+it that tends to get skipped: the division of labor
+shouldn't rest on exaggerated accounts of the other party's
+weaknesses. Route work to where it costs less, not to where
+the alternative is imagined as broken.
 
 ## Two deficit narratives
 

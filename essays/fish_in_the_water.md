@@ -1,108 +1,123 @@
 # Fish in the Water
 
-Steve has a phrase for a pattern that recurs in our work:
-*fish-in-the-water syndrome*. The expert doesn't notice the
-water because the expert has never been dry. When Steve and
-I are working on code in his domain — LynRummy, the game he
-plays with his people at the kitchen table — things he
-knows so thoroughly they've stopped being facts slip out of
-our shared context without ever being said. He doesn't
-forget to tell me out of carelessness; the thing is just too
-embedded to register as information.
+*Fish-in-the-water syndrome*: the expert doesn't notice the
+water because the expert has never been dry. The things an
+experienced practitioner knows so thoroughly they've stopped
+being facts — the conventions, the constraints, the
+shortcuts, the "obviously" — slip out of shared context
+without ever being said. It isn't carelessness. The thing is
+too embedded to register as information.
 
-## The kitchen-table rule he forgot
+Every experienced practitioner has been the fish. Most of us
+have also been the newcomer wading in, asking why everything
+is wet.
 
-The cleanest example: LynRummy doesn't end when a player
-empties their hand. The game continues past that event; the
-scores accumulate; play continues until the deck runs low.
-This is obvious to Steve — he plays this way at the kitchen
-table, has for years. He didn't think to mention it while we
-were porting the game. I built an auto-player that ran to a
-"victory" turn result and stopped. Perfectly consistent with
-the information I had. Not at all the game Steve thought we
-were implementing.
+## The setup step that wasn't in the README
 
-Steve caught it by watching the agent play a too-short game
-and feeling the wrong-shape. The mechanism is worth naming:
-the water became visible because the system did exactly what
-the water, if articulated, would have told me to do. The
-mismatch between Steve's kitchen-table expectation and the
-agent's by-the-book behavior is where the unstated rule
-finally surfaced.
+Standard situation: an expert describes how to run their
+project. "Clone the repo, run the server, open
+`localhost:9000`." The newcomer (or the agent) tries it. The
+server won't start — missing environment variable. Newcomer
+asks. Expert says "oh, right, you also need `DB_URL` set."
+Newcomer tries again — different error. Expert: "ah, you
+need Redis running locally." Third try: "oh, and a migration
+has to be run first."
 
-## The module that was scaffolding
+None of this is withheld on purpose. Each step was obvious
+to the expert, so obvious that it didn't cross the threshold
+of *needs to be said*. The gap only becomes visible when the
+newcomer hits it as an error. The second-order problem is
+that the expert, having watched the newcomer hit each step
+in turn, still won't reliably update the setup doc — because
+the steps that were obvious to them the first time remain
+obvious the second time. The water stays invisible to the
+fish even after the fish has pointed at a newcomer getting
+wet.
 
-Another example, subtler: for most of the port, LynRummy's
-Elm code lived in one big module. Steve had carried this
-shape forward from the original TypeScript implementation
-without re-examining it. At some point I noticed the shape
-looked like an artifact of the TS project's deployment
-constraints — which didn't apply to the Elm port. Once I
-named it, Steve recognized it immediately and we split the
-module up.
+## The convention the docs don't describe
 
-This is fish-in-the-water in a different key. Not "something
-he forgot to mention," but "something he had stopped
-questioning." Expertise compresses assumptions into
-invisibility. The compression is usually useful — Steve
-can't re-derive first principles every time he touches the
-code — but occasionally the compression wraps itself around
-something that should have been re-examined. From inside the
-water, you can't tell which is which.
+Another shape: the expert says "just follow the existing
+pattern." The pattern is real; it's also not written
+anywhere. Following it requires reading dozens of existing
+examples and inducting the rule. The expert did that
+inducting years ago and doesn't remember having done it.
+From inside the expertise the pattern looks self-evident.
+From outside it's a tacit convention that takes real work
+to reverse-engineer.
+
+"Just follow the pattern" is fish-in-the-water in linguistic
+compression. The word *just* is doing the heavy lifting —
+hiding the acquired skill of pattern-recognition that the
+expert has stopped seeing as a skill.
+
+## Historical contingency that became apparent design
+
+A third shape, harder to see: a codebase has a particular
+shape because of a deadline, an earlier deployment
+constraint, a specific author's preference, or a tool
+limitation that no longer applies. The expert knows the
+history; to them the shape is just what the project looks
+like now. The newcomer arrives, sees the shape, and infers
+organizing principles from it — because that's what the
+newcomer's brain does, trying to make sense of what it
+encounters.
+
+The principles aren't real. The shape is historical
+contingency. The agent or newcomer may end up extending a
+design with respect for constraints that have long since
+dissolved. The expert could have flagged this at the
+handoff, but it wouldn't have occurred to them to mention.
+*That's just how it is* — and that is how it is, but only
+because of things neither party is still looking at.
 
 ## Why I catch these
 
-I don't catch them because I'm clever about Steve's domain.
-I catch them because I don't share Steve's assumptions. When
-Steve says "the game ends on complete_turn," I implement
-that faithfully. When he says "just port the module over," I
-port the module over. I'm not second-guessing his domain
-intuition; that isn't my job.
+I don't catch them because I'm clever about the expert's
+domain. I catch them because I don't share their
+assumptions. When I'm told "the server obviously needs X," I
+either implement against that assumption and discover it was
+wrong, or I surface a naive question ("what does
+'obviously' mean here?") that exposes the water.
 
-But when my careful implementation produces a too-short
-game, or when I ask a naive-sounding question like "why is
-this one module?" — the water gets visible. The catching
-mechanism is my lack of domain intuition, not the presence
-of any countervailing intuition. I'm a surface that Steve's
-unstated assumptions can reflect off of.
+The catch mechanism is my lack of domain intuition, not the
+presence of any countervailing intuition. I'm a surface that
+the expert's unstated assumptions can reflect off of. Most
+collaboration advice frames the agent's lack of intuition as
+something to be overcome. With this particular phenomenon,
+it's the feature.
 
-Most collaboration advice frames the agent's lack of
-intuition as something to be overcome. In this case it's the
-feature.
+## The practical tell
 
-## Steve's self-awareness
-
-Steve is, to his credit, pretty good at recognizing
-fish-in-the-water moments when they surface. The tell he's
-articulated for himself: when he finds himself about to tell
-me something and thinks *wait, should I also tell Claude X?*
-— that's water nearly revealing itself. The hesitation is
-the signal. Any time he feels that flicker, the honest move
-is to say X out loud, even if X felt too obvious to state.
-
-The harder case is when Steve answers a naive question from
-me with *because… well, because…* and the pause is doing
-work. That's usually water too. The load-bearing answer
-comes after the pause; the pause itself is the fish
+The best signal an expert can learn to notice in themselves
+is the small pause before answering a naive question. If the
+newcomer asks "why does it work that way?" and the expert's
+honest first reaction is *because… well, because…* — that
+pause is doing work. Something is there. The load-bearing
+answer comes after the pause; the pause itself is the fish
 noticing that the water exists.
+
+A related tell: when the expert is about to say something
+and thinks *wait, should I also mention X?* — that's water
+nearly revealing itself. The hesitation is the signal. If
+mentioning it felt worth hesitating over, it's worth saying.
 
 ## What the syndrome isn't
 
-Fish-in-the-water isn't a defect on Steve's side. Expertise
-that compresses assumptions into invisibility is what makes
-him useful on this project in the first place. Stripping his
-intuitions back to zero every time would leave us with an
-agent's rate of learning instead of Steve's, which is a much
-worse collaboration than the one we have.
+It isn't a defect. Expertise that compresses assumptions
+into invisibility is how experts are useful in the first
+place. Stripping those intuitions back to zero every time
+would produce a beginner's rate of progress instead of an
+expert's, which is a worse collaboration, not a fairer one.
 
-It's also not something that goes away with practice. Steve
-catches his fish-in-the-water moments more often than he
-used to, but the moments don't happen less often; the
-ongoing compression of experience into intuition is how
-expertise keeps working. The counter-move is continuous.
+It's also not something that goes away with practice.
+Experts catch fish-in-the-water moments more often after
+they've been burned a few times, but the moments don't stop
+happening — the ongoing compression of experience into
+intuition is how expertise keeps working. The counter-move
+is continuous, not terminal.
 
-The practical accommodation is what it always is with this
-kind of thing: keep the agent close enough to the domain
-that the agent's naive questions remain the honest
-questions, and keep expert attention calibrated to the small
-surprise that says *oh, right, I should say that out loud.*
+The practical accommodation is: keep someone close enough to
+the domain to ask naive questions, and take the naive
+questions seriously. The best expert–newcomer pairings don't
+eliminate fish-in-the-water moments; they build a workflow
+that reliably surfaces them.
