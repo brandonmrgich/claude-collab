@@ -40,7 +40,7 @@ func HandleEssaysList(w http.ResponseWriter, r *http.Request) {
 // HandleEssayView serves /essays/<filename>.
 func HandleEssayView(w http.ResponseWriter, r *http.Request) {
 	name := strings.TrimPrefix(r.URL.Path, "/essays/")
-	renderView(w, r, EssaysDir, "/essays", name)
+	renderView(w, r, EssaysDir, "/essays", name, false)
 }
 
 // HandleSteveList serves /users/steve/general — Steve's drafts.
@@ -52,7 +52,7 @@ func HandleSteveList(w http.ResponseWriter, r *http.Request) {
 // HandleSteveView serves /users/steve/general/<filename>.
 func HandleSteveView(w http.ResponseWriter, r *http.Request) {
 	name := strings.TrimPrefix(r.URL.Path, "/users/steve/general/")
-	renderView(w, r, SteveDir, "/users/steve/general", name)
+	renderView(w, r, SteveDir, "/users/steve/general", name, true)
 }
 
 func renderList(w http.ResponseWriter, dir, urlPrefix, heading, sub string) {
@@ -83,7 +83,7 @@ func renderList(w http.ResponseWriter, dir, urlPrefix, heading, sub string) {
 	fmt.Fprint(w, pageFoot())
 }
 
-func renderView(w http.ResponseWriter, r *http.Request, dir, urlPrefix, name string) {
+func renderView(w http.ResponseWriter, r *http.Request, dir, urlPrefix, name string, enableComments bool) {
 	if name == "" {
 		http.Redirect(w, r, urlPrefix, http.StatusFound)
 		return
@@ -110,6 +110,9 @@ func renderView(w http.ResponseWriter, r *http.Request, dir, urlPrefix, name str
 	fmt.Fprint(w, `<div class="wiki-md">`)
 	fmt.Fprint(w, renderMarkdown(string(body)))
 	fmt.Fprint(w, `</div>`)
+	if enableComments {
+		fmt.Fprint(w, ArticleCommentsJS)
+	}
 	fmt.Fprint(w, pageFoot())
 }
 

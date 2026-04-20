@@ -29,19 +29,28 @@ type articleCommentFile struct {
 	Comments []articleComment `json:"comments"`
 }
 
-// resolveArticlePath accepts a URL path like "essays/foo.md"
-// and returns the filesystem path, refusing anything that
-// escapes the essays directory or contains a traversal.
+// resolveArticlePath accepts the full URL path of an essay
+// ("/essays/foo.md" or "/users/steve/general/foo.md") and
+// returns the filesystem path, refusing traversal attempts.
 func resolveArticlePath(article string) (string, bool) {
-	article = strings.TrimPrefix(article, "/")
-	article = strings.TrimPrefix(article, "essays/")
-	if strings.Contains(article, "..") || strings.Contains(article, "/") {
+	var dir, name string
+	switch {
+	case strings.HasPrefix(article, "/essays/"):
+		dir = EssaysDir
+		name = strings.TrimPrefix(article, "/essays/")
+	case strings.HasPrefix(article, "/users/steve/general/"):
+		dir = SteveDir
+		name = strings.TrimPrefix(article, "/users/steve/general/")
+	default:
 		return "", false
 	}
-	if !strings.HasSuffix(article, ".md") {
+	if strings.Contains(name, "..") || strings.Contains(name, "/") {
 		return "", false
 	}
-	return filepath.Join(EssaysDir, article), true
+	if !strings.HasSuffix(name, ".md") {
+		return "", false
+	}
+	return filepath.Join(dir, name), true
 }
 
 func commentsSidecarPath(articleAbs string) string {
@@ -129,10 +138,10 @@ const ArticleCommentsJS = `
   var container = document.querySelector('.wiki-md');
   if (!container) return;
 
-  // Derive the article filename from the URL: /essays/<name>.md
-  var m = location.pathname.match(/^\/essays\/(.+\.md)$/);
-  if (!m) return;
-  var articlePath = 'essays/' + m[1];
+  // Use the full URL path as the article identifier. Server
+  // dispatches on the known prefixes (/essays/, /users/steve/general/).
+  if (!/\.md$/.test(location.pathname)) return;
+  var articlePath = location.pathname;
 
   var style = document.createElement('style');
   style.textContent = [
