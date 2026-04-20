@@ -17,10 +17,31 @@ This is a starting point, not a polished product.
   files alongside each essay.
 - **Conventions.** Three documented conventions Steve uses
   with Claude: `.claude` sidecars, memory files, and essays.
-  See `CONVENTIONS.md`.
+  See [CONVENTIONS.md](CONVENTIONS.md).
 - **Templates.** Example sidecar, example memory entry, and
   demonstration essays showing what the format looks like
   in practice.
+
+## Essays
+
+Read on GitHub (rendered), or locally in the running app to
+try the inline-comment mechanic. Suggested first read is
+*Inclinations, Not Deficits* — the frame the others build on.
+
+- [Inclinations, Not Deficits](essays/inclinations_not_deficits.md)
+  — route work to inclinations, not to imagined deficits
+- [The Ergonomic Gap](essays/the_ergonomic_gap.md) — humans
+  and agents have asymmetric retrieval costs; close the gap
+- [Ebb and Flow](essays/ebb_and_flow.md) — zoom-in /
+  zoom-out rhythm; announce mode transitions
+- [Where to Put the Files](essays/where_to_put_the_files.md)
+  — agents aren't configured; they're asked
+- [Fish in the Water](essays/fish_in_the_water.md) —
+  expertise compresses assumptions; an agent's naive
+  questions surface them
+- [On the Quiet Paragraph](essays/on_the_quiet_paragraph.md)
+  — why paragraph-anchored comments change the feel of
+  reading
 
 ## Read first, deploy second
 
