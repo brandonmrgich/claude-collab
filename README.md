@@ -54,6 +54,23 @@ try the inline-comment mechanic. Suggested first read is
   — why paragraph-anchored comments change the feel of
   reading
 
+## Directory convention
+
+- `/essays/` — **published** pieces. Transcend Steve-
+  concerns; speak to a broad audience about collaboration
+  patterns. Stable-linked; don't rename.
+- `/users/<name>/general/` — **real-time** space, one per
+  contributor. Drafts, working notes, essay-reply
+  correspondence that hasn't earned (or doesn't need) the
+  general-audience jump. Currently just `/users/steve/
+  general/`; structure is ready for others.
+- `/templates/` — copy-from-here starting points for the
+  conventions.
+- `/server/` — the local-reading toolkit.
+
+Graduation from a user's general/ to the published
+`/essays/` is a deliberate act, not a drift.
+
 ## Read first, deploy second
 
 Suggested order:
