@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "para_index": 2,
+      "author": "example-reader",
+      "timestamp": "2026-04-20T16:00:00Z",
+      "text": "This line — 'the reaction stayed attached to the thing it was reacting to' — is the whole thesis in one sentence. Everything else is supporting."
+    },
+    {
+      "para_index": 4,
+      "author": "example-reader",
+      "timestamp": "2026-04-20T16:02:00Z",
+      "text": "The 'no cost to flagging one paragraph while enjoying the next' point resonates. The lack of cost is what lets it become a habit instead of a ceremony."
+    },
+    {
+      "para_index": 7,
+      "author": "example-reader",
+      "timestamp": "2026-04-20T16:05:00Z",
+      "text": "Disagree gently here — I think there IS a version of this that works in real-time chat, but only if both sides treat specific paragraphs as addressable. The infrastructure helps but isn't strictly required."
+    }
+  ]
+}

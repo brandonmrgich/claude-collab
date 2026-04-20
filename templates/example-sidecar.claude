@@ -1,0 +1,39 @@
+just_use example-source-file.go
+
+# label: EARLY (demonstration sidecar)
+# role: show the minimum sidecar shape
+
+A sidecar is a short brief describing a source file. Its
+primary audience is future agents (and humans) picking up
+this code months later. The minimum bar is that the reader
+shouldn't have to open the source to know the module's role,
+maturity, and load-bearing quirks.
+
+## Structure (this file demonstrates it)
+
+- First line: `just_use <filename>` — optional shorthand
+  saying "this sidecar describes that source."
+- Two header comments: `# label:` (WORKHORSE / EARLY / SPIKE
+  / INTRICATE / BUGGY / VESTIGIAL) and `# role:` (one-line
+  summary).
+- Body: free-form, headings welcome. Typical sections:
+  what it does, load-bearing invariants, status, deliberate
+  non-goals, pointers to related modules.
+
+## Guidance
+
+- Honest labels. If something is SPIKE, say SPIKE. Hiding
+  maturity hurts future readers.
+- Cite load-bearing behavior (the thing that will bite you
+  if you change it without understanding). Leave
+  self-explanatory mechanics to the source.
+- Pointers matter: link consumers, memories, sibling
+  modules. The sidecar is a node in a graph, not a file
+  in isolation.
+
+## When to update
+
+Whenever the source's role changes substantively, or when a
+new load-bearing invariant emerges, or when a previously-
+WORKHORSE module starts decaying. A stale sidecar is worse
+than a missing one.
