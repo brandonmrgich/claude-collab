@@ -1,13 +1,13 @@
 {
   "comments": [
     {
-      "para_index": 4,
+      "para_index": 3,
       "author": "example-reader",
       "timestamp": "2026-04-20T18:12:00Z",
-      "text": "'I've paid zero tokens of cognition' is the honest accounting. Most discussions of agent verbosity treat it as an output-side concern; framing it as a routing decision for retrieval cost is cleaner."
+      "text": "'Zero tokens of cognition' is the honest accounting. Most discussions of agent verbosity treat it as an output-side concern; framing it as a routing decision for retrieval cost is cleaner."
     },
     {
-      "para_index": 10,
+      "para_index": 6,
       "author": "example-reader",
       "timestamp": "2026-04-20T18:14:00Z",
       "text": "Reading this in an essay-format viewer is on-the-nose — the format itself is the fix for the scrollback problem being described."
