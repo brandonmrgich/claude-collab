@@ -60,11 +60,12 @@ Suggested order:
 
 1. `CONVENTIONS.md` — the three conventions and why they
    exist.
-2. `essays/` — one demonstration essay rendered with the
-   format. Read it, then load it in the running app and
-   try dropping an inline comment.
+2. `essays/` — read a few on GitHub (they're linked above).
+   *Inclinations, Not Deficits* is a good starting point;
+   the others stand alone.
 3. `templates/` — copy these to bootstrap your own files.
-4. `server/` — the Go code. Build, configure, run.
+4. `server/` — the Go code. Build and run to read the same
+   essays with inline paragraph-anchored comments enabled.
 
 ## Deploy
 
