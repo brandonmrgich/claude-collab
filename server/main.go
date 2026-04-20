@@ -20,21 +20,25 @@ import (
 
 func main() {
 	var port int
-	var essaysDir string
+	var essaysDir, steveDir string
 	flag.IntVar(&port, "port", 9100, "HTTP port")
-	flag.StringVar(&essaysDir, "essays", "../essays", "essays directory (relative paths resolved from cwd)")
+	flag.StringVar(&essaysDir, "essays", "../essays", "published essays dir (relative paths resolved from cwd)")
+	flag.StringVar(&steveDir, "steve", "../users/steve/general", "Steve's real-time essays dir")
 	flag.Parse()
 
 	EssaysDir = essaysDir
+	SteveDir = steveDir
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handleRoot)
 	mux.HandleFunc("/essays", HandleEssaysList)
 	mux.HandleFunc("/essays/", HandleEssayView)
+	mux.HandleFunc("/users/steve/general", HandleSteveList)
+	mux.HandleFunc("/users/steve/general/", HandleSteveView)
 	mux.HandleFunc("/article-comments", HandleArticleComments)
 
 	addr := fmt.Sprintf("localhost:%d", port)
-	log.Printf("claude-collab: serving http://%s  (essays: %s)", addr, essaysDir)
+	log.Printf("claude-collab: serving http://%s  (essays: %s, steve: %s)", addr, essaysDir, steveDir)
 	log.Fatal(http.ListenAndServe(addr, mux))
 }
 

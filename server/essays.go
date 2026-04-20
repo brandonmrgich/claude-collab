@@ -15,10 +15,14 @@ import (
 	"time"
 )
 
-// EssaysDir is the directory scanned for *.md essays. Set from
-// the --essays flag in main(); paths are resolved relative to
-// the process's cwd.
-var EssaysDir string
+// EssaysDir is the directory for the main /essays collection.
+// SteveDir is the directory for Steve's real-time drafts.
+// Both are set from flags in main(); paths are resolved relative
+// to the process's cwd.
+var (
+	EssaysDir string
+	SteveDir  string
+)
 
 type essayEntry struct {
 	Slug    string
@@ -27,26 +31,49 @@ type essayEntry struct {
 	ModTime time.Time
 }
 
-// HandleEssaysList serves /essays — the landing list.
+// HandleEssaysList serves /essays — the published collection.
 func HandleEssaysList(w http.ResponseWriter, r *http.Request) {
-	entries := loadEssays(EssaysDir)
+	renderList(w, EssaysDir, "/essays", "Essays",
+		"Published essays. Click any title to read with inline comments.")
+}
+
+// HandleEssayView serves /essays/<filename>.
+func HandleEssayView(w http.ResponseWriter, r *http.Request) {
+	name := strings.TrimPrefix(r.URL.Path, "/essays/")
+	renderView(w, r, EssaysDir, "/essays", name)
+}
+
+// HandleSteveList serves /users/steve/general — Steve's drafts.
+func HandleSteveList(w http.ResponseWriter, r *http.Request) {
+	renderList(w, SteveDir, "/users/steve/general", "Steve — real-time",
+		"Drafts and working notes. Some of these graduate to /essays; most don't.")
+}
+
+// HandleSteveView serves /users/steve/general/<filename>.
+func HandleSteveView(w http.ResponseWriter, r *http.Request) {
+	name := strings.TrimPrefix(r.URL.Path, "/users/steve/general/")
+	renderView(w, r, SteveDir, "/users/steve/general", name)
+}
+
+func renderList(w http.ResponseWriter, dir, urlPrefix, heading, sub string) {
+	entries := loadEssays(dir)
 	sort.Slice(entries, func(i, j int) bool {
 		return entries[i].ModTime.After(entries[j].ModTime)
 	})
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, pageHead("Essays"))
-	fmt.Fprint(w, `<h1>Essays</h1>`)
-	fmt.Fprintf(w, `<p class="sub">Reading the files in <code>%s</code>. Click any title to read with inline comments.</p>`,
-		html.EscapeString(EssaysDir))
+	fmt.Fprint(w, pageHead(heading))
+	fmt.Fprintf(w, `<h1>%s</h1>`, html.EscapeString(heading))
+	fmt.Fprintf(w, `<p class="sub">%s</p>`, html.EscapeString(sub))
 	fmt.Fprint(w, `<ul class="essays">`)
 	if len(entries) == 0 {
-		fmt.Fprint(w, `<li class="muted">No essays found. Add a *.md file to the essays directory.</li>`)
+		fmt.Fprint(w, `<li class="muted">No essays found. Add a *.md file to the directory.</li>`)
 	}
 	for _, e := range entries {
 		t := e.ModTime.Local().Format("Jan 2, 2006 · 3:04 PM")
 		fmt.Fprintf(w,
-			`<li><a href="/essays/%s">%s</a><span class="date">%s</span></li>`,
+			`<li><a href="%s/%s">%s</a><span class="date">%s</span></li>`,
+			html.EscapeString(urlPrefix),
 			html.EscapeString(e.File),
 			html.EscapeString(e.Title),
 			html.EscapeString(t),
@@ -56,19 +83,16 @@ func HandleEssaysList(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, pageFoot())
 }
 
-// HandleEssayView serves /essays/<filename> — renders one
-// markdown file with the inline-comment widget injected.
-func HandleEssayView(w http.ResponseWriter, r *http.Request) {
-	name := strings.TrimPrefix(r.URL.Path, "/essays/")
+func renderView(w http.ResponseWriter, r *http.Request, dir, urlPrefix, name string) {
 	if name == "" {
-		http.Redirect(w, r, "/essays", http.StatusFound)
+		http.Redirect(w, r, urlPrefix, http.StatusFound)
 		return
 	}
 	if !strings.HasSuffix(name, ".md") || strings.Contains(name, "/") || strings.Contains(name, "..") {
 		http.Error(w, "Invalid essay name", http.StatusBadRequest)
 		return
 	}
-	abs := filepath.Join(EssaysDir, name)
+	abs := filepath.Join(dir, name)
 	body, err := os.ReadFile(abs)
 	if err != nil {
 		http.Error(w, "Not found: "+name, http.StatusNotFound)
@@ -82,14 +106,10 @@ func HandleEssayView(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	fmt.Fprint(w, pageHead(title))
-	fmt.Fprintf(w, `<p><a href="/essays">&larr; All essays</a></p>`)
+	fmt.Fprintf(w, `<p><a href="%s">&larr; Back</a></p>`, html.EscapeString(urlPrefix))
 	fmt.Fprint(w, `<div class="wiki-md">`)
 	fmt.Fprint(w, renderMarkdown(string(body)))
 	fmt.Fprint(w, `</div>`)
-	// ArticleCommentsJS injection disabled — the inline-note UI
-	// was the demo surface for the reply-to-essay feature, which
-	// is documented elsewhere. The code in article_comments.go
-	// stays available for anyone who wants to re-enable it.
 	fmt.Fprint(w, pageFoot())
 }
 
