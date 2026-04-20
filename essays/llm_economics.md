@@ -88,6 +88,40 @@ idea because it "would be too much work," ask specifically
 pre-LLM intuitions. Often the answer is "less work than I
 think, by a factor that crosses a threshold."
 
+## Economics and ergonomics
+
+This essay pairs with *The Ergonomic Gap*. They're two
+faces of the same accounting question, and it's worth
+naming them together — especially because the words come
+from the same Greek root (*oiko-*, household management).
+The two cost-axes go hand in hand.
+
+Ergonomics asks, within a single moment of collaboration:
+which party does each task cost less, *right now*? The
+answer routes work spatially — this task to the human,
+that task to the agent — based on who pays less retrieval
+cost in this moment. Give the human the full URL; let the
+agent look up the id from context; restate the next action
+verbatim after a detour.
+
+Economics asks, comparing against history: how expensive
+is this task *now* versus how expensive it used to be? The
+answer routes work temporally — speculative designs,
+aggressive refactors, per-file documentation — based on
+what recently crossed below threshold.
+
+Both are cost questions. Both require noticing when a
+stale assumption is driving the wrong routing. The
+ergonomic failure mode is treating a cheap task as
+expensive because it would have cost the human a lot
+(retyping a URL from memory instead of asking the agent to
+hand one over). The economic failure mode is treating a
+newly-cheap task as expensive because it used to cost the
+whole team a lot (refusing to propose a throwaway DSL for
+an abstraction you're stuck on).
+
+Same reflex. Different axes.
+
 ## What the compounding doesn't touch
 
 Not everything gets cheaper. Judgment still costs what it

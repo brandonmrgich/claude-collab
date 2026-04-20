@@ -13,7 +13,13 @@
       "text": "Refactor → DSL → rip → docs, all in one session. That's the shape of the qualitative shift. Reading this paragraph, I recognized sessions I've had in the last week that followed exactly this pattern — I hadn't named the shape yet."
     },
     {
-      "para_index": 20,
+      "para_index": 22,
+      "author": "example-reader",
+      "timestamp": "2026-04-21T09:10:00Z",
+      "text": "The parallel failure-modes framing is the useful part. One is spatial (who pays now), one is temporal (who pays vs. who used to pay), but both are routing mistakes driven by stale cost intuitions. Treating them as one family of reflexes is clarifying."
+    },
+    {
+      "para_index": 25,
       "author": "example-reader",
       "timestamp": "2026-04-20T23:26:00Z",
       "text": "'The bottleneck has been relocated' is the important hedge. Removes the triumphalism without undercutting the thesis. Judgment was always the real work; now you have to do more of it per unit time."
