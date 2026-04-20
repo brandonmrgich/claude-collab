@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "para_index": 2,
+      "author": "example-reader",
+      "timestamp": "2026-04-20T20:15:00Z",
+      "text": "'The wrong assumption about an agent' is the point. Tool-configuration assumptions are so defaulted-to that it takes a conversation like this to surface them."
+    },
+    {
+      "para_index": 8,
+      "author": "example-reader",
+      "timestamp": "2026-04-20T20:17:00Z",
+      "text": "Specification-for-humans vs. specification-for-agents is a clean cut. I'd argue a lot of existing docs meant 'for agents' would be better as conversation transcripts; the information is often pre-digestion the agent doesn't need."
+    },
+    {
+      "para_index": 10,
+      "author": "example-reader",
+      "timestamp": "2026-04-20T20:19:00Z",
+      "text": "The closing sentence — 'pre-build to avoid friction that wasn't coming' — generalizes past Claude. A lot of over-configured software is exactly this."
+    }
+  ]
+}
