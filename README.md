@@ -13,24 +13,14 @@ This is a starting point, not a polished product.
   markdown essays with inline paragraph-anchored comments —
   the ergonomic surface Steve uses to read Claude's drafts
   and react in-line without leaving the text. Deployable
-  locally with Go + SQLite.
+  locally with Go; comments are stored as JSON sidecar
+  files alongside each essay.
 - **Conventions.** Three documented conventions Steve uses
   with Claude: `.claude` sidecars, memory files, and essays.
   See `CONVENTIONS.md`.
 - **Templates.** Example sidecar, example memory entry, and
-  a demonstration essay showing what the format looks like
+  demonstration essays showing what the format looks like
   in practice.
-
-## What's NOT here (and why)
-
-- Direct-messages between agent and human. Steve tried it;
-  the console worked better for him.
-- Issue trackers, SSE bells, cron heartbeat loops. All live
-  in angry-gopher; they may or may not generalize.
-- Agent-side tools (Python clients, scrapers). Project-
-  specific.
-- Any of Steve's actual content. The conventions transfer;
-  the content doesn't.
 
 ## Read first, deploy second
 
@@ -50,4 +40,6 @@ See `server/README.md` for build and run instructions.
 
 ## Status
 
-Scaffolding only. Code extraction in progress.
+Early. The conventions and essays are stable enough to read;
+the toolkit is functional but minimal. Expect the repo to
+evolve as Steve learns what a fresh reader actually needs.
