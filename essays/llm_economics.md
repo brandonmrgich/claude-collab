@@ -36,7 +36,11 @@ Generating test fixtures for an unfamiliar schema: was
 annoying boilerplate, now free.
 
 Maintaining per-file sidecar documentation as code changes:
-was impossible in practice (nobody does it), now routine.
+was impossible in practice (nobody does it), now the default.
+When a function gets renamed or a type refactored, the
+adjacent `.claude` file updates in the same session, usually
+the same commit. The half-life of documentation used to be
+measured in weeks; the half-life is now "until next edit."
 
 Each of these costs crossed a threshold. Taken individually,
 each is a modest improvement. Taken together, they compound.
@@ -48,13 +52,15 @@ that operation. Run tests more often. Refactor more freely.
 That's linear.
 
 When *many* operations drop below threshold at once, the
-workflow changes qualitatively. You can refactor a design,
-*then* write a DSL for the abstraction you discovered,
-*then* rip the old code it's replacing, *then* update the
-docs and sidecars — all in one session, because each
-individual step is now below the interrupt-flow threshold.
-Previously this sequence was a multi-sprint project; now
-it's an afternoon.
+workflow changes qualitatively. You can diagnose a bug,
+*then* discover the underlying model is wrong, *then*
+refactor the model, *then* watch the bug disappear and a
+shelved UI feature land as a byproduct, *then* write tests
+covering the new shape, *then* update the docs and sidecars,
+*then* write an essay on the lessons — all in one afternoon,
+because each individual step is now below the interrupt-flow
+threshold. Previously this sequence was a multi-sprint
+project; now it's an afternoon.
 
 The compound effect enables workflows that were foreclosed
 by the old cost structure. "Design a throwaway DSL to
@@ -136,6 +142,13 @@ to be 80% mechanics and 20% judgment is now 20% mechanics
 and 80% judgment. That's a good thing — judgment is where
 the interesting work was all along — but it also means the
 bottleneck hasn't gone away. It's just been relocated.
+
+A related trap: because the mechanics are cheap, it's easy
+to keep executing past the point where judgment should have
+stepped in. Agents will happily refactor the wrong thing
+for a full afternoon if you let them. The human's job isn't
+gone; it's been distilled to the most expensive, least
+mechanizable fraction of what it used to be.
 
 ## A running check
 

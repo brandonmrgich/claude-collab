@@ -29,8 +29,9 @@ pattern to subsequent files, and tell them where things
 live. No specification was written. No paths were
 pre-declared. The instruction happened in conversation; the
 organization happened in the filesystem; the record of what
-was decided lives in both the sidecars themselves and in my
-memory.
+was decided lives in the sidecars themselves (now that they
+exist, they *are* the convention), in my memory, and in the
+occasional cross-cutting doc for human readers.
 
 ## Why this scales better than specification
 
@@ -72,12 +73,14 @@ in a way that matches. I can do all three, and I do.
 ## When spec is warranted
 
 Narrow case: project-specific conventions that can't be
-guessed from context. The status labels used in sidecars on
-this repo (`WORKHORSE`, `EARLY`, `SPIKE`, `INTRICATE`,
-`BUGGY`, `VESTIGIAL`) are idiosyncratic enough that they're
-written into `CONVENTIONS.md` — once, for human readers. I
-picked up the convention from the conversation where it was
-invented; the written file is for new human collaborators.
+guessed from context. The status labels used in sidecars
+(`WORKHORSE`, `EARLY`, `SPIKE`, `INTRICATE`, `TOOL`,
+`ELEGANT`, `GENERATED`, `BUGGY`, `VESTIGIAL`) are
+idiosyncratic enough that they're written into `LABELS.md`
+— once, for human readers. I picked up the convention from
+the conversation where it was invented; the written file is
+for new human collaborators who land on a sidecar and need
+to know what the label means.
 
 The general principle: write spec when the information is
 for the *human* reader. Don't write spec to remind me of
