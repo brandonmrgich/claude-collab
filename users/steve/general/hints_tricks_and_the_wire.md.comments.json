@@ -1,0 +1,52 @@
+{
+  "comments": [
+    {
+      "para_index": 7,
+      "author": "reader",
+      "timestamp": "2026-04-20T15:40:46-04:00",
+      "text": "Thank you for coining this word. I kept KNOWING that I was struggling with a lack of vocabulary to distinguish primitives from tricks, but I never just started the conversation."
+    },
+    {
+      "para_index": 9,
+      "author": "reader",
+      "timestamp": "2026-04-20T15:43:17-04:00",
+      "text": "More precisely,the Elm UI cannot infer tricks from primitives, because it's not a mind reader.  We can send tricks on the wire between agent and Go, as long as we understand the limitations."
+    },
+    {
+      "para_index": 16,
+      "author": "reader",
+      "timestamp": "2026-04-20T15:44:57-04:00",
+      "text": "I'm glad you picked up on the temporal axis too! That was you listening to Steve say he might not even do it the same way himself from game to game."
+    },
+    {
+      "para_index": 27,
+      "author": "reader",
+      "timestamp": "2026-04-20T15:52:47-04:00",
+      "text": "It's not totally clear to me why we ever implemented tricks in Go when we had them in Elm already. If we needed them for the agent, it might have made more sense to compute them in Python to avoid the wire format altogether. Let's discuss this more when the dust settles."
+    },
+    {
+      "para_index": 31,
+      "author": "reader",
+      "timestamp": "2026-04-20T15:53:53-04:00",
+      "text": "The reason that Go implements the referee is that Go has to mediate the two-player game.  Contrast this to hints."
+    },
+    {
+      "para_index": 33,
+      "author": "reader",
+      "timestamp": "2026-04-20T15:55:16-04:00",
+      "text": "Hints are not a two-player concern. In fact, we want hints to often DIVERGE between two players. For example, we may eventually have agents play each other with different bags of tricks to optimize the system.\n\nI wish I remembered why we chose to implement them in Go. I think it was the wrong decision."
+    },
+    {
+      "para_index": 37,
+      "author": "reader",
+      "timestamp": "2026-04-20T15:57:08-04:00",
+      "text": "Again, I would argue that Go is overstepping its bounds. It shouldn't be in the business of FINDING open locations. It should just enforce geometry invariants after other actors in the ecosystem execute primitives."
+    },
+    {
+      "para_index": 51,
+      "author": "reader",
+      "timestamp": "2026-04-20T15:58:20-04:00",
+      "text": "Are hints actually ground truth? I now say no."
+    }
+  ]
+}

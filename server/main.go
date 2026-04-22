@@ -20,27 +20,26 @@ import (
 
 func main() {
 	var port int
-	var essaysDir, steveDir, scrapeDir string
+	var essaysDir, steveBaseDir, scrapeDir string
 	flag.IntVar(&port, "port", 9100, "HTTP port")
 	flag.StringVar(&essaysDir, "essays", "../essays", "published essays dir (relative paths resolved from cwd)")
-	flag.StringVar(&steveDir, "steve", "../users/steve/general", "Steve's real-time essays dir")
+	flag.StringVar(&steveBaseDir, "steve-base", "../users/steve", "Steve's base dir; any subdir (general, random, …) is served at /users/steve/<subdir>")
 	flag.StringVar(&scrapeDir, "scrape", "../../calm-collective", "project asset dir served at /scrape/ (defaults to calm-collective/)")
 	flag.Parse()
 
 	EssaysDir = essaysDir
-	SteveDir = steveDir
+	SteveBaseDir = steveBaseDir
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handleRoot)
 	mux.HandleFunc("/essays", HandleEssaysList)
 	mux.HandleFunc("/essays/", HandleEssayView)
-	mux.HandleFunc("/users/steve/general", HandleSteveList)
-	mux.HandleFunc("/users/steve/general/", HandleSteveView)
+	mux.HandleFunc("/users/steve/", HandleSteveAny)
 	mux.HandleFunc("/article-comments", HandleArticleComments)
 	mux.Handle("/scrape/", http.StripPrefix("/scrape/", http.FileServer(http.Dir(scrapeDir))))
 
 	addr := fmt.Sprintf("localhost:%d", port)
-	log.Printf("claude-collab: serving http://%s  (essays: %s, steve: %s, scrape: %s)", addr, essaysDir, steveDir, scrapeDir)
+	log.Printf("claude-collab: serving http://%s  (essays: %s, steve-base: %s, scrape: %s)", addr, essaysDir, steveBaseDir, scrapeDir)
 	log.Fatal(http.ListenAndServe(addr, mux))
 }
 

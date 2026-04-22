@@ -1,0 +1,40 @@
+{
+  "comments": [
+    {
+      "para_index": 11,
+      "author": "reader",
+      "timestamp": "2026-04-21T13:09:15-04:00",
+      "text": "The Gopher server should only own the Dealer when coordination is actually required. That's a good example to flesh out a bit once we get to the Go-specific part of the document ecosystem."
+    },
+    {
+      "para_index": 14,
+      "author": "reader",
+      "timestamp": "2026-04-21T13:10:35-04:00",
+      "text": "The agent has no eyes but KNOWS geometry. We need to be super clear that constraints must be REAL and not artificial before we accept them as true constraints."
+    },
+    {
+      "para_index": 17,
+      "author": "reader",
+      "timestamp": "2026-04-21T13:13:05-04:00",
+      "text": "We need to state the principle even more fundamentally.  A LynRummy game, whether autonomous or not, is a manifestation of events that are carefully chosen by human players or agents.  All of these events should be represented clearly and accurately WITHIN components and ACROSS components. The wire format is the mechanism AND the discipline, but the EVENTS are the system."
+    },
+    {
+      "para_index": 22,
+      "author": "reader",
+      "timestamp": "2026-04-21T13:35:00-04:00",
+      "text": "It's important to note that Elm and Python can both play either completely autonomously or nearly autonomously. So it's important to understand that entities have THEIR OWN action logs that they implicitly own themselves during single-player games especially but ALSO within two-player games. \n\nIn an autonomous game, Elm doesn't even talk to the server. It has its log of actions in terms that make sense for Elm. It only INTEGRATES other system-wide events into its action log when it's ready to."
+    },
+    {
+      "para_index": 32,
+      "author": "reader",
+      "timestamp": "2026-04-21T13:44:18-04:00",
+      "text": "We have barely ever done two-way coordination in practice, so this is very fresh territory for us. Even when you and I play games together, the coordination aspect has been out-of-band."
+    },
+    {
+      "para_index": 36,
+      "author": "reader",
+      "timestamp": "2026-04-21T13:48:41-04:00",
+      "text": "You should refine the wording a bit here. The Elm UI captures all of the information about the source of inbound events when those events arrive. The source of the information IS important for certain decisions. But Elm strives to turn that information into events that can be executed in real time or later using the same mechanisms.  We don't want drift. The Elm software has multiple layers where the responsibilities are the APPROPRIATE level."
+    }
+  ]
+}

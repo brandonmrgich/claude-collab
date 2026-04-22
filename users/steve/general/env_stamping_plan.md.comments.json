@@ -1,0 +1,34 @@
+{
+  "comments": [
+    {
+      "para_index": 8,
+      "author": "reader",
+      "timestamp": "2026-04-22T08:06:27-04:00",
+      "text": "Go with the JS port here."
+    },
+    {
+      "para_index": 9,
+      "author": "reader",
+      "timestamp": "2026-04-22T08:08:28-04:00",
+      "text": "Would this benefit from a JS port for the same reason as #2? I don't have any real friction against JS ports, to be clear. They're a first-class citizen in the overall Elm ecosystem.  We use Elm for its beautiful TEA model that makes the overall system easy to understand; we use JS for what's good at, which is things that are a bit less common in day-to-day work."
+    },
+    {
+      "para_index": 13,
+      "author": "reader",
+      "timestamp": "2026-04-22T08:10:24-04:00",
+      "text": "There's a very important nuance here, though. Even if the environment has changed, it's quite likely that the Board itself will NOT have changed. Since intra-board moves always happen WITHIN the Board frame of reference, we can often replay those moves faithfully DESPITE other things having changed in the environment."
+    },
+    {
+      "para_index": 14,
+      "author": "reader",
+      "timestamp": "2026-04-22T08:11:32-04:00",
+      "text": "Possibly. I may have been a little hasty last night to ask you to remove those. OTOH, we might not have tremendous urgency to bring them back, as long as we enforce that the Board itself remains the same shape."
+    },
+    {
+      "para_index": 16,
+      "author": "reader",
+      "timestamp": "2026-04-22T08:12:30-04:00",
+      "text": "It's not clear to me why intra-board samples would arrive in the wrong frame to begin with."
+    }
+  ]
+}

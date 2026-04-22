@@ -16,12 +16,13 @@ import (
 )
 
 // EssaysDir is the directory for the main /essays collection.
-// SteveDir is the directory for Steve's real-time drafts.
-// Both are set from flags in main(); paths are resolved relative
-// to the process's cwd.
+// SteveBaseDir is the parent of Steve's subdirs (general,
+// random, ...); each subdir is served at
+// /users/steve/<subdir>. Both are set from flags in main();
+// paths are resolved relative to the process's cwd.
 var (
-	EssaysDir string
-	SteveDir  string
+	EssaysDir    string
+	SteveBaseDir string
 )
 
 type essayEntry struct {
@@ -43,16 +44,59 @@ func HandleEssayView(w http.ResponseWriter, r *http.Request) {
 	renderView(w, r, EssaysDir, "/essays", name, false)
 }
 
-// HandleSteveList serves /users/steve/general — Steve's drafts.
-func HandleSteveList(w http.ResponseWriter, r *http.Request) {
-	renderList(w, SteveDir, "/users/steve/general", "Steve — real-time",
-		"Drafts and working notes. Some of these graduate to /essays; most don't.")
+// HandleSteveAny serves any subdir under /users/steve/. URL
+// shapes:
+//
+//	/users/steve/                  → redirect to /users/steve/general
+//	/users/steve/<subdir>          → list of *.md files in that subdir
+//	/users/steve/<subdir>/         → same as above
+//	/users/steve/<subdir>/<name>.md → render that file with inline comments
+//
+// <subdir> must be a simple identifier (letters, digits, -_);
+// `.` and `..` are refused. Subdirs that don't exist on disk
+// return 404. No auto-create — subdirs are provisioned by the
+// user or a sibling memory convention.
+func HandleSteveAny(w http.ResponseWriter, r *http.Request) {
+	rest := strings.TrimPrefix(r.URL.Path, "/users/steve/")
+	if rest == "" {
+		http.Redirect(w, r, "/users/steve/general", http.StatusFound)
+		return
+	}
+	parts := strings.SplitN(rest, "/", 2)
+	subdir := parts[0]
+	if !isValidSteveSubdir(subdir) {
+		http.Error(w, "Invalid subdir", http.StatusBadRequest)
+		return
+	}
+	dir := filepath.Join(SteveBaseDir, subdir)
+	if info, err := os.Stat(dir); err != nil || !info.IsDir() {
+		http.Error(w, "Subdir not found: "+subdir, http.StatusNotFound)
+		return
+	}
+	urlPrefix := "/users/steve/" + subdir
+	if len(parts) == 1 || parts[1] == "" {
+		renderList(w, dir, urlPrefix, "Steve — "+subdir,
+			"Drafts and working notes in "+subdir+"/. Some of these graduate to /essays; most don't.")
+		return
+	}
+	renderView(w, r, dir, urlPrefix, parts[1], true)
 }
 
-// HandleSteveView serves /users/steve/general/<filename>.
-func HandleSteveView(w http.ResponseWriter, r *http.Request) {
-	name := strings.TrimPrefix(r.URL.Path, "/users/steve/general/")
-	renderView(w, r, SteveDir, "/users/steve/general", name, true)
+func isValidSteveSubdir(s string) bool {
+	if s == "" || s == "." || s == ".." {
+		return false
+	}
+	for _, c := range s {
+		switch {
+		case c >= 'a' && c <= 'z':
+		case c >= 'A' && c <= 'Z':
+		case c >= '0' && c <= '9':
+		case c == '-' || c == '_':
+		default:
+			return false
+		}
+	}
+	return true
 }
 
 func renderList(w http.ResponseWriter, dir, urlPrefix, heading, sub string) {

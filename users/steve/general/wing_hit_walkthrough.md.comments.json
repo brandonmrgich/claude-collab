@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "para_index": 6,
+      "author": "reader",
+      "timestamp": "2026-04-22T11:01:22-04:00",
+      "text": "Let's add a test for that."
+    },
+    {
+      "para_index": 11,
+      "author": "reader",
+      "timestamp": "2026-04-22T11:03:36-04:00",
+      "text": "That seems like something we can test. A simple test should validate that the function returning the location of a wing should return the proper coordinates within the board frame (not the viewport frame)."
+    },
+    {
+      "para_index": 13,
+      "author": "reader",
+      "timestamp": "2026-04-22T11:04:16-04:00",
+      "text": "Let's automate that test."
+    }
+  ]
+}
