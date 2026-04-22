@@ -16,13 +16,15 @@ import (
 )
 
 // EssaysDir is the directory for the main /essays collection.
-// SteveBaseDir is the parent of Steve's subdirs (general,
-// random, ...); each subdir is served at
-// /users/steve/<subdir>. Both are set from flags in main();
-// paths are resolved relative to the process's cwd.
+// SteveBaseDir is the parent of Steve's public subdirs (general,
+// random, ...); each subdir is served at /users/steve/<subdir>.
+// SteveRootDir is the flat private notes dir (claude-steve
+// repo), served at /steve/. All set from flags in main(); paths
+// are resolved relative to the process's cwd.
 var (
 	EssaysDir    string
 	SteveBaseDir string
+	SteveRootDir string
 )
 
 type essayEntry struct {
@@ -80,6 +82,21 @@ func HandleSteveAny(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	renderView(w, r, dir, urlPrefix, parts[1], true)
+}
+
+// HandleSteveRootList serves /steve — the list of Steve's
+// private flat notes in the claude-steve repo. Inline comments
+// enabled on the rendered views (they're Steve's; he annotates
+// them).
+func HandleSteveRootList(w http.ResponseWriter, r *http.Request) {
+	renderList(w, SteveRootDir, "/steve", "Steve — private notes",
+		"Day-to-day notes and essays from the claude-steve repo. Not public; annotations enabled.")
+}
+
+// HandleSteveRootView serves /steve/<name>.md.
+func HandleSteveRootView(w http.ResponseWriter, r *http.Request) {
+	name := strings.TrimPrefix(r.URL.Path, "/steve/")
+	renderView(w, r, SteveRootDir, "/steve", name, true)
 }
 
 func isValidSteveSubdir(s string) bool {

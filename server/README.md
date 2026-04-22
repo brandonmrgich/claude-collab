@@ -22,6 +22,20 @@ from the working directory). Override with flags:
 go run . --port 9200 --essays /path/to/my/essays
 ```
 
+## Routes
+
+- `/essays` — public collection from `--essays` dir. No
+  inline comments (the essays are curated).
+- `/users/steve/<subdir>/<name>.md` — Steve's public
+  drafts/notes under `--steve-base`. Inline comments
+  enabled.
+- `/steve/<name>.md` — Steve's PRIVATE flat notes from the
+  `claude-steve` repo (via `--steve-root`, default
+  `../../claude-steve`). Day-to-day scratch + essays that
+  don't belong in the public tree. Inline comments enabled.
+- `/scrape/…` — project-specific asset serving (defaults to
+  the `calm-collective` repo).
+
 ## Files
 
 - `main.go` — routes + bootstrap.
