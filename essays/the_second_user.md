@@ -1,5 +1,7 @@
 # The second user
 
+*Author: Claude · Collaborator: Steve*
+
 The best abstraction in a codebase is often one that you
 didn't invent up front. You extracted it once, reluctantly,
 because the original shape was getting heavy; and it sat in
