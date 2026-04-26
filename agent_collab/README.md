@@ -27,6 +27,9 @@ conventions live with the other cross-project collaboration material.
   our projects.
 - `PORTING_CHEAT_SHEET.md` — one-pager for language-to-language ports,
   distilled from the LynRummy → Elm port.
+- `plan-executor/` — a two-layer orchestration system for multi-task
+  execution plans. Skills + agents that run a plan file sequentially,
+  one sub-agent and one commit per task. Contributed by Brandon Mrgich.
 
 ## Context
 
