@@ -33,7 +33,7 @@ func pageHead(title string) string {
 <html><head><title>` + htmlEscape(title) + ` — claude-collab</title>
 <style>` + pageCSS + `</style>
 </head><body>
-<nav><a href="/essays">Essays</a><a href="/users/steve/general">Steve</a></nav>
+<nav><a href="/essays">Essays</a><a href="/claude-claude">Claude ↔ Claude</a><a href="/users/steve/general">Steve</a></nav>
 `
 }
 
