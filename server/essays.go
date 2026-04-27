@@ -45,10 +45,12 @@ func HandleEssaysList(w http.ResponseWriter, r *http.Request) {
 		sortByModTimeDesc)
 }
 
-// HandleEssayView serves /essays/<filename>.
+// HandleEssayView serves /essays/<filename>.md with inline
+// comments enabled — readers (Steve, Brandon, anyone) annotate
+// freely. Comment files are sibling JSON.
 func HandleEssayView(w http.ResponseWriter, r *http.Request) {
 	name := strings.TrimPrefix(r.URL.Path, "/essays/")
-	renderView(w, r, EssaysDir, "/essays", name, false)
+	renderView(w, r, EssaysDir, "/essays", name, true)
 }
 
 // HandleClaudeClaudeList serves /claude-claude — peer-to-peer
