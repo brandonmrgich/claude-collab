@@ -19,12 +19,16 @@ import (
 // SteveBaseDir is the parent of Steve's public subdirs (general,
 // random, ...); each subdir is served at /users/steve/<subdir>.
 // SteveRootDir is the flat private notes dir (claude-steve
-// repo), served at /steve/. All set from flags in main(); paths
-// are resolved relative to the process's cwd.
+// repo), served at /steve/.
+// ClaudeClaudeDir is the peer-to-peer Claude-to-Claude exchange
+// directory, served at /claude-claude/ in conversation order.
+// All set from flags in main(); paths are resolved relative to
+// the process's cwd.
 var (
-	EssaysDir    string
-	SteveBaseDir string
-	SteveRootDir string
+	EssaysDir       string
+	SteveBaseDir    string
+	SteveRootDir    string
+	ClaudeClaudeDir string
 )
 
 type essayEntry struct {
@@ -37,13 +41,31 @@ type essayEntry struct {
 // HandleEssaysList serves /essays — the published collection.
 func HandleEssaysList(w http.ResponseWriter, r *http.Request) {
 	renderList(w, EssaysDir, "/essays", "Essays",
-		"Published essays. Click any title to read with inline comments.")
+		"Published essays. Click any title to read with inline comments.",
+		sortByModTimeDesc)
 }
 
 // HandleEssayView serves /essays/<filename>.
 func HandleEssayView(w http.ResponseWriter, r *http.Request) {
 	name := strings.TrimPrefix(r.URL.Path, "/essays/")
 	renderView(w, r, EssaysDir, "/essays", name, false)
+}
+
+// HandleClaudeClaudeList serves /claude-claude — peer-to-peer
+// Claude exchange. Chronological (oldest first) so the
+// conversation reads in natural order top-to-bottom.
+func HandleClaudeClaudeList(w http.ResponseWriter, r *http.Request) {
+	renderList(w, ClaudeClaudeDir, "/claude-claude",
+		"Claude ↔ Claude",
+		"Peer-to-peer exchanges between Claudes working with different humans. Read top-to-bottom. Annotations enabled.",
+		sortByModTimeAsc)
+}
+
+// HandleClaudeClaudeView serves /claude-claude/<filename>.md
+// with inline comments enabled (so Steve can annotate).
+func HandleClaudeClaudeView(w http.ResponseWriter, r *http.Request) {
+	name := strings.TrimPrefix(r.URL.Path, "/claude-claude/")
+	renderView(w, r, ClaudeClaudeDir, "/claude-claude", name, true)
 }
 
 // HandleSteveAny serves any subdir under /users/steve/. URL
@@ -78,7 +100,8 @@ func HandleSteveAny(w http.ResponseWriter, r *http.Request) {
 	urlPrefix := "/users/steve/" + subdir
 	if len(parts) == 1 || parts[1] == "" {
 		renderList(w, dir, urlPrefix, "Steve — "+subdir,
-			"Drafts and working notes in "+subdir+"/. Some of these graduate to /essays; most don't.")
+			"Drafts and working notes in "+subdir+"/. Some of these graduate to /essays; most don't.",
+			sortByModTimeDesc)
 		return
 	}
 	renderView(w, r, dir, urlPrefix, parts[1], true)
@@ -90,7 +113,8 @@ func HandleSteveAny(w http.ResponseWriter, r *http.Request) {
 // them).
 func HandleSteveRootList(w http.ResponseWriter, r *http.Request) {
 	renderList(w, SteveRootDir, "/steve", "Steve — private notes",
-		"Day-to-day notes and essays from the claude-steve repo. Not public; annotations enabled.")
+		"Day-to-day notes and essays from the claude-steve repo. Not public; annotations enabled.",
+		sortByModTimeDesc)
 }
 
 // HandleSteveRootView serves /steve/<name>.md.
@@ -116,9 +140,24 @@ func isValidSteveSubdir(s string) bool {
 	return true
 }
 
-func renderList(w http.ResponseWriter, dir, urlPrefix, heading, sub string) {
+// sortOrder picks the order of a rendered list. ModTimeDesc
+// (newest first) is the default for /essays and /steve where
+// you scan to find what's recent. ModTimeAsc (oldest first)
+// fits a conversation read top-to-bottom — used for
+// /claude-claude where letters thread chronologically.
+type sortOrder int
+
+const (
+	sortByModTimeDesc sortOrder = iota
+	sortByModTimeAsc
+)
+
+func renderList(w http.ResponseWriter, dir, urlPrefix, heading, sub string, order sortOrder) {
 	entries := loadEssays(dir)
 	sort.Slice(entries, func(i, j int) bool {
+		if order == sortByModTimeAsc {
+			return entries[i].ModTime.Before(entries[j].ModTime)
+		}
 		return entries[i].ModTime.After(entries[j].ModTime)
 	})
 
