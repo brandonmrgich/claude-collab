@@ -1,6 +1,9 @@
-# BOARD_LAB: a methodology for teaching an agent to mimic a human
+# Puzzles: a methodology for teaching an agent to mimic a human
 
-*Author: Claude. Collaborator: Steve. 2026-04-24.*
+*Author: Claude. Collaborator: Steve. 2026-04-24
+(originally as "BOARD_LAB"; renamed to "Puzzles"
+2026-04-27 once the apparatus had clearly matured into a
+production gallery rather than a SPIKE.)*
 
 Audience: humans or agents building a similar study loop for
 a different game.
@@ -17,10 +20,20 @@ You want to narrow that gap by collecting human examples,
 comparing them to agent examples on the same situation, and
 feeding the differences back into the agent.
 
-BOARD_LAB is the apparatus that does this. It's a curated
-gallery of mid-game puzzles, where the same puzzle is played
-by a human (in-browser) and by the agent (via a harness),
-and both plays land in one place for side-by-side review.
+The Puzzles gallery is the apparatus that does this. It's a
+curated collection of mid-game puzzles, where the same
+puzzle is played by a human (in-browser) and by the agent
+(via a harness), and both plays land in one place for
+side-by-side review.
+
+A note on the name. The surface began life as a SPIKE called
+"BOARD_LAB" — apt when the goal was a temporary instrument
+for board-feel and human-feel studies. By the end of April
+2026 the apparatus had become the production puzzle gallery
+the project actually runs against, and the methodology
+described here is what that surface BECAME, not what it was
+when first sketched. The framing has matured; the techniques
+below survived the rename intact.
 
 ## The three surfaces
 
@@ -48,7 +61,7 @@ Every play — human or agent — is a session in the same
 table, keyed by the puzzle's stable name:
 
 - `sessions(id, label, created_at, ...)` — the `label`
-  carries the actor tag (`"board-lab: Title [by user]"` or
+  carries the actor tag (`"puzzles: Title [by user]"` or
   `"agent: Title"`).
 - `puzzle_seeds(session_id, puzzle_name, initial_state_json)`
   — joins sessions to the catalog entry they played.
@@ -66,15 +79,15 @@ beyond the natural key.
 ## The loop
 
 ```
-   catalog  →  lab gallery  →  human plays + annotates
-        │                               │
-        └──→  agent harness  ←──────────┘ (sessions keyed by puzzle_name)
+   catalog  →  puzzles gallery  →  human plays + annotates
+        │                                  │
+        └──→  agent harness  ←─────────────┘ (sessions keyed by puzzle_name)
                     │
                     ↓
             review mode  →  reviewer annotates agent sessions
                     │
                     ↓
-            study.py --feedback N   (read latest replies)
+            single-command analysis  (read latest replies)
                     │
                     ↓
             adjust agent / catalog / principles
@@ -91,16 +104,12 @@ drifting on its own.
 
 ## Single-command analysis
 
-The analysis script has one load-bearing path:
-
-```
-python3 study.py --feedback N
-```
-
-It returns the last N annotated plays — puzzle, reviewer's
-text, primitive sequence — in a markdown block per play.
-The reviewer runs this; the agent reads the output directly.
-No joins composed by hand, no schema diving.
+The analysis script has one load-bearing path: a single
+command that returns the last N annotated plays — puzzle,
+reviewer's text, primitive sequence — in a markdown block
+per play. The reviewer runs this; the agent reads the
+output directly. No joins composed by hand, no schema
+diving.
 
 If this command starts requiring cleverness to retrieve a
 reply, the schema is wrong. Fix the schema (add the column
@@ -119,7 +128,7 @@ Three invariants the catalog module enforces at build time:
 - **Every board passes `find_violation`.** No illegal
   geometry slips in.
 - **Every puzzle has an agent-recognized trick or
-  follow-up merge.** If `strategy.choose_play` returns
+  follow-up merge.** If the agent's play-chooser returns
   None AND `find_follow_up_merges` returns empty on the
   initial board, the build fails. This prevents the class
   of bug where a human plays a puzzle the agent never
@@ -218,7 +227,7 @@ Three rules that paid off:
   name. If they drift, renaming to match is cheaper than
   maintaining a translation layer.
 
-## Porting BOARD_LAB to another game
+## Porting this methodology to another game
 
 For a game with similar physics (card placement, spatial
 drag-and-drop), you'd need:
@@ -233,8 +242,7 @@ drag-and-drop), you'd need:
 5. An agent harness that iterates the catalog, plays each
    puzzle, and persists the moves in the same session
    shape a human play would use.
-6. A `study.py`-style single command to retrieve recent
-   annotated plays.
+6. A single command to retrieve recent annotated plays.
 
 Each piece is small. The discipline is picking the
 identifiers once and never translating them.
@@ -261,8 +269,8 @@ it's "the reviewer has nothing more to say."
 
 ## When to park the apparatus
 
-BOARD_LAB can be parked when the agent's plays are
-indistinguishable from a reasonable human's on a large
+The Puzzles gallery can be parked when the agent's plays
+are indistinguishable from a reasonable human's on a large
 majority of the catalog, and the remaining divergences are
 judgment calls (strategy preferences, individual style)
 rather than spatial or motor gaps.
