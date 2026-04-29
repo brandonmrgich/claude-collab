@@ -9,6 +9,9 @@ markdown with paragraph-anchored Notes so Steve can reply inline
 without paraphrasing or numbering questions. Use it instead of
 long console replies.
 
+The Go server lives in `~/showell_repos/claude-collab/server/`.
+The reader tool lives in `~/showell_repos/claude-collab/tools/show_comments.py`.
+
 ## Quick start
 
 1. Write the markdown file:
