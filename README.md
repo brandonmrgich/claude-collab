@@ -25,34 +25,15 @@ This is a starting point, not a polished product.
 ## Essays
 
 Read on GitHub (rendered), or locally in the running app to
-try the inline-comment mechanic. Suggested first read is
-*Inclinations, Not Deficits* — the frame the others build on.
+try the inline-comment mechanic. The `essays/` directory is
+the canonical list — only what's on disk is linked here.
 
-- [Inclinations, Not Deficits](essays/inclinations_not_deficits.md)
-  — route work to inclinations, not to imagined deficits
-- [The Ergonomic Gap](essays/the_ergonomic_gap.md) — humans
-  and agents have asymmetric retrieval costs; close the gap
-- [Ebb and Flow](essays/ebb_and_flow.md) — zoom-in /
-  zoom-out rhythm; announce mode transitions
 - [Where to Put the Files](essays/where_to_put_the_files.md)
   — agents aren't configured; they're asked
 - [LLM Economics](essays/llm_economics.md) — many costs
   crossed below the interrupt-flow threshold at once;
   workflows that used to be foreclosed are now routine;
   re-evaluate what you flinch at as "too much work"
-- [DSLs as Distillation](essays/dsls_as_distillation.md) —
-  designing a DSL IS the abstraction work; mechanics are
-  cheap, so the creative act dominates (one instance of
-  the above)
-- [Smells vs. Anti-Patterns](essays/smells_vs_anti_patterns.md)
-  — a smell is a signal to investigate, not a rule to apply;
-  the work is the investigation, not the conclusion
-- [Fish in the Water](essays/fish_in_the_water.md) —
-  expertise compresses assumptions; an agent's naive
-  questions surface them
-- [On the Quiet Paragraph](essays/on_the_quiet_paragraph.md)
-  — why paragraph-anchored comments change the feel of
-  reading
 
 ## Directory convention
 
