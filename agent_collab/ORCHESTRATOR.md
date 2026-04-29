@@ -59,6 +59,20 @@ visible.
 Name git irreversibility explicitly for exploratory dispatches —
 it changes how confidently the agent acts.
 
+## Structural problems vs. local fixes
+
+When dispatching against a pain-ranked or otherwise flagged file,
+explicitly tell the agent to watch for systemic structural issues —
+not just the surface symptom. A large file is sometimes large for a
+good reason; a churny file is sometimes churny because it's the
+right place for frequent change. The agent should name its read on
+this before touching anything.
+
+Calibration: "If the file is large because it's doing too many
+things, say so and propose a split before implementing. If it's
+large because the domain is genuinely complex, say that too — don't
+manufacture a refactor."
+
 ## The meta-bandwidth payoff
 
 When sub-agents handle the mechanical work, top-level Claude has
