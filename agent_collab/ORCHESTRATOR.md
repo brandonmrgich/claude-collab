@@ -9,6 +9,12 @@ sub-agent operating principles (IF mechanics, return format,
 commit tiers, failure handling) live in the canonical reference:
 `~/showell_repos/claude-steve/PLAN_EXECUTOR_OPERATING_PRINCIPLES.md`
 
+**How to dispatch:** use the `Agent` tool with `subagent_type:
+general-purpose` (or a more specific type if the task matches one —
+see the tool description for the available types). Pass the repo
+path, task brief, and a mandatory `this_would_have_been_easier_if`
+requirement in the prompt.
+
 What's here is the orchestrator-side view: what to dispatch, how
 to read the results, and the canary methodology.
 
