@@ -15,8 +15,8 @@ This is a starting point, not a polished product.
   and react in-line without leaving the text. Deployable
   locally with Go; comments are stored as JSON sidecar
   files alongside each essay.
-- **Conventions.** Three documented conventions Steve uses
-  with Claude: `.claude` sidecars, memory files, and essays.
+- **Conventions.** Two documented conventions Steve uses
+  with Claude: memory files and essays.
   See [CONVENTIONS.md](CONVENTIONS.md).
 - **Templates.** Example sidecar, example memory entry, and
   demonstration essays showing what the format looks like
@@ -64,6 +64,11 @@ try the inline-comment mechanic. Suggested first read is
   correspondence that hasn't earned (or doesn't need) the
   general-audience jump. Currently just `/users/steve/
   general/`; structure is ready for others.
+- `/agent_collab/` — **agent-facing operational docs.**
+  If you're a sub-agent doing work in this repo, start here:
+  [`AGENT_CONVENTIONS.md`](agent_collab/AGENT_CONVENTIONS.md),
+  [`ESSAY_SURFACE.md`](agent_collab/ESSAY_SURFACE.md),
+  [`ORCHESTRATOR.md`](agent_collab/ORCHESTRATOR.md).
 - `/templates/` — copy-from-here starting points for the
   conventions.
 - `/server/` — the local-reading toolkit.

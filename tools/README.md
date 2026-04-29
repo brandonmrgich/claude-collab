@@ -1,5 +1,11 @@
 # tools
 
+> **IN TRANSITION (2026-04-29):** The tools model is being
+> revised. Agent workflow tools will be built here canonically
+> (not copied in from other projects). Skip this directory
+> until the transition is complete — do not add new tools as
+> snapshots from angry-gopher.
+
 General-purpose scripts and small utilities pulled from
 project-specific repos. The convention here is **snapshot, not
 import**:
