@@ -30,10 +30,6 @@ the canonical list — only what's on disk is linked here.
 
 - [Where to Put the Files](essays/where_to_put_the_files.md)
   — agents aren't configured; they're asked
-- [LLM Economics](essays/llm_economics.md) — many costs
-  crossed below the interrupt-flow threshold at once;
-  workflows that used to be foreclosed are now routine;
-  re-evaluate what you flinch at as "too much work"
 - [Derive, Don't Delegate](essays/derive_dont_delegate.md) —
   when you delegate an answer you already own, you buy a new
   failure mode, a new timing concern, and a harder test story
