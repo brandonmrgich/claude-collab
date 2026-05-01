@@ -15,8 +15,8 @@ This is a starting point, not a polished product.
   and react in-line without leaving the text. Deployable
   locally with Go; comments are stored as JSON sidecar
   files alongside each essay.
-- **Conventions.** Three documented conventions Steve uses
-  with Claude: `.claude` sidecars, memory files, and essays.
+- **Conventions.** Two documented conventions Steve uses
+  with Claude: memory files and essays.
   See [CONVENTIONS.md](CONVENTIONS.md).
 - **Templates.** Example sidecar, example memory entry, and
   demonstration essays showing what the format looks like
@@ -25,36 +25,30 @@ This is a starting point, not a polished product.
 ## Essays
 
 Read on GitHub (rendered), or locally in the running app to
-try the inline-comment mechanic. Suggested first read is
-*Inclinations, Not Deficits* — the frame the others build on.
+try the inline-comment mechanic. The `essays/` directory is
+the canonical list — only what's on disk is linked here.
 
-- [Inclinations, Not Deficits](essays/inclinations_not_deficits.md)
-  — route work to inclinations, not to imagined deficits
-- [The Ergonomic Gap](essays/the_ergonomic_gap.md) — humans
-  and agents have asymmetric retrieval costs; close the gap
-- [Ebb and Flow](essays/ebb_and_flow.md) — zoom-in /
-  zoom-out rhythm; announce mode transitions
 - [Where to Put the Files](essays/where_to_put_the_files.md)
   — agents aren't configured; they're asked
-- [LLM Economics](essays/llm_economics.md) — many costs
-  crossed below the interrupt-flow threshold at once;
-  workflows that used to be foreclosed are now routine;
-  re-evaluate what you flinch at as "too much work"
-- [DSLs as Distillation](essays/dsls_as_distillation.md) —
-  designing a DSL IS the abstraction work; mechanics are
-  cheap, so the creative act dominates (one instance of
-  the above)
-- [Smells vs. Anti-Patterns](essays/smells_vs_anti_patterns.md)
-  — a smell is a signal to investigate, not a rule to apply;
-  the work is the investigation, not the conclusion
-- [Fish in the Water](essays/fish_in_the_water.md) —
-  expertise compresses assumptions; an agent's naive
-  questions surface them
-- [On the Quiet Paragraph](essays/on_the_quiet_paragraph.md)
-  — why paragraph-anchored comments change the feel of
-  reading
+- [Derive, Don't Delegate](essays/derive_dont_delegate.md) —
+  when you delegate an answer you already own, you buy a new
+  failure mode, a new timing concern, and a harder test story
+- [Confident Code, Confident Prose](essays/confident_code_confident_prose.md)
+  — hedged code and hedged prose fail in the same way: a layer
+  between what the author knows and what the artifact says
 
 ## Directory convention
+
+The reading surface (`/server/`) is orthogonal to where
+essays live. It accepts an `--essays` flag and renders any
+directory you point it at; the layout below describes
+**Steve's** working convention, not a required taxonomy.
+Other contributors can keep their own essay tree (Brandon
+keeps his at `~/.claude/essays/` with YAML front-matter
+encoding lifecycle state) and still hand the URL to the
+same renderer.
+
+Steve's layout:
 
 - `/essays/` — **published** pieces. Transcend Steve-
   concerns; speak to a broad audience about collaboration
@@ -64,12 +58,23 @@ try the inline-comment mechanic. Suggested first read is
   correspondence that hasn't earned (or doesn't need) the
   general-audience jump. Currently just `/users/steve/
   general/`; structure is ready for others.
+- `/agent_collab/` — **agent-facing operational docs.**
+  If you're a sub-agent doing work in this repo, start here:
+  [`AGENT_CONVENTIONS.md`](agent_collab/AGENT_CONVENTIONS.md),
+  [`ESSAY_SURFACE.md`](agent_collab/ESSAY_SURFACE.md),
+  [`ORCHESTRATOR.md`](agent_collab/ORCHESTRATOR.md).
 - `/templates/` — copy-from-here starting points for the
   conventions.
 - `/server/` — the local-reading toolkit.
 
 Graduation from a user's general/ to the published
 `/essays/` is a deliberate act, not a drift.
+
+The renderer recognizes YAML front-matter (a `---`-delimited
+block at the top of the file) and excludes it from output, so
+contributors who want lifecycle metadata alongside the prose
+(`status: open|resolved|...`, `tags`, etc.) can keep it
+without a stray horizontal rule on the rendered page.
 
 ## Read first, deploy second
 

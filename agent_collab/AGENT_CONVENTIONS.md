@@ -1,6 +1,6 @@
 # Agent conventions
 
-**As-of:** 2026-04-15
+**As-of:** 2026-04-29
 **Confidence:** Working — patterns distilled from weeks of collaboration; some entries Firm, some still settling.
 **Durability:** Stable until the collaboration model shifts; revise as new patterns crystallize.
 
@@ -79,6 +79,19 @@ This applies to DB schemas, data formats, config shapes — anything
 where a migration would be a workaround for "we're too scared to
 touch the canonical representation."
 
+### Scripts are first-class (2026-04-28 doctrine)
+Before hand-composing any build, launch, test, or regen command,
+check `ops/` for an existing script. `ops/list` is the canonical
+index. Scripts are real code; they accumulate flags, paths, and
+sequencing that is invisible when you hand-compose the equivalent
+shell pipeline.
+
+Two corollaries:
+- If you find yourself composing a multi-step command that a script
+  already covers, run the script.
+- If a script is missing a needed flag, add it — don't bypass the
+  script with an ad-hoc workaround alongside it.
+
 ### Tests inform structure
 If your test uses a verb or noun that isn't a first-class thing in
 production code, promote it. "kick the Ace" appearing in a test but
@@ -153,6 +166,12 @@ better than quietly context-switching.
   ask whether to continue cataloging or start fixing.
 - When you discover a non-obvious insight, update the relevant doc
   *immediately*, not "at the end."
+- **Use the essay surface for any reply >15 lines or with
+  headers/bullets/multiple questions.** Write to
+  `~/showell_repos/claude-steve/randomNNN.md` and return the URL
+  `http://localhost:9100/steve/randomNNN.md`. See `ESSAY_SURFACE.md`
+  for the full workflow. Dense console blocks are the expensive path;
+  the file write is cheaper.
 
 ## When the human is new to agent work
 
@@ -168,12 +187,16 @@ an agent much:
 
 ## Cross-repo context
 
-If you're in one of these four repos, these are the connections:
+If you're in one of these repos, these are the connections:
 
 - **silly-canvas-games** — standalone; behavior-study games.
-- **LynRummy** — card game rules engine; shared vocabulary.
-- **angry-gopher** — Go backend; has the DB, auth, ops tooling.
-- **angry-cat** — TypeScript frontend; talks to Gopher.
+- **angry-gopher** — primary repo. Go is dumb file storage only
+  (`views/lynrummy_elm.go`); all game logic lives in Elm and Python.
+  Has the DB, auth, ops tooling, and the Elm UI for Lyn Rummy.
+- **angry-cat** — legacy TypeScript frontend; still runs but Elm is
+  the go-forward UI. No new feature work here.
+- **claude-collab** — agent workflow tools, essay surface, onboarding
+  docs. Not a game repo.
 
-Changes in LynRummy often imply matching changes in Cat AND Gopher.
-Commit both at the same rate; don't let one fall behind.
+The old "LynRummy" separate-repo separation is gone. Lyn Rummy is the
+Elm app living inside angry-gopher. Go no longer owns game domain logic.

@@ -1,37 +1,10 @@
 # Conventions
 
-Three conventions Steve uses when working with Claude on
-long-running projects. None is mandatory. All three
-reinforce each other.
+Two conventions Steve uses when working with Claude on
+long-running projects. Neither is mandatory. Both reinforce
+each other.
 
-## 1. Sidecars (`.claude` files)
-
-Every source file has a sibling `.claude` file. The sidecar
-is a short, plain-text brief describing the module's role,
-status, load-bearing invariants, and pointers.
-
-**Minimum bar**: a reader should be able to pick up the
-module months later from the sidecar alone — they shouldn't
-need to re-read the source to know what it's for.
-
-**Status labels**: `WORKHORSE` (stable, heavily used),
-`EARLY` (kept but not yet stable), `SPIKE` (exploratory,
-may be ripped), `INTRICATE` (algorithmically dense; apply a
-different mindset), `BUGGY` (known-broken; advertise
-rather than hide), `VESTIGIAL` (superseded or one-shot;
-candidate for removal). Labels are advisory, not
-authoritative — edit freely.
-
-**Format conventions**: the first line can be
-`just_use filename.go` (or `.py`, `.elm`) — a shorthand
-that says "this sidecar describes that source." Label and
-role appear as comments in the header. Body is free-form
-Markdown-ish.
-
-See `templates/example-sidecar.claude` for a ready-to-copy
-starting point.
-
-## 2. Memory
+## 1. Memory
 
 Durable notes Claude keeps across conversations. Live in
 a per-project directory (Claude Code manages the path).
@@ -58,7 +31,7 @@ their subject.
 
 See `templates/example-memory.md`.
 
-## 3. Essays
+## 2. Essays
 
 Long-form markdown files where Claude or Steve work out an
 idea in prose. Rendered with inline paragraph-anchored
@@ -88,17 +61,14 @@ in-place.
 
 | Convention | Lifetime   | Audience              | Shape        |
 |---         |---         |---                    |---           |
-| Sidecar    | Code-tied  | Future agent readers  | Structured   |
 | Memory     | Persistent | Claude (self)         | Structured   |
 | Essay      | Occasional | Human (maybe public)  | Prose        |
 
-Sidecars answer "what is this code and why." Memory
-answers "what did we learn that should outlive this
+Memory answers "what did we learn that should outlive this
 session." Essays answer "let me think this through in
 prose before it becomes either."
 
 They reinforce: an insight that lands in an essay often
-deserves to be distilled into a memory; a memory that
-describes load-bearing behavior often deserves to be
-reflected in the relevant sidecar; a sidecar that gets
-long enough to breathe usually wants an essay behind it.
+deserves to be distilled into a memory; a memory that has
+grown into a principle often deserves an essay to explain
+the reasoning behind it.
