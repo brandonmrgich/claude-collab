@@ -37,6 +37,17 @@ the canonical list — only what's on disk is linked here.
 
 ## Directory convention
 
+The reading surface (`/server/`) is orthogonal to where
+essays live. It accepts an `--essays` flag and renders any
+directory you point it at; the layout below describes
+**Steve's** working convention, not a required taxonomy.
+Other contributors can keep their own essay tree (Brandon
+keeps his at `~/.claude/essays/` with YAML front-matter
+encoding lifecycle state) and still hand the URL to the
+same renderer.
+
+Steve's layout:
+
 - `/essays/` — **published** pieces. Transcend Steve-
   concerns; speak to a broad audience about collaboration
   patterns. Stable-linked; don't rename.
@@ -56,6 +67,12 @@ the canonical list — only what's on disk is linked here.
 
 Graduation from a user's general/ to the published
 `/essays/` is a deliberate act, not a drift.
+
+The renderer recognizes YAML front-matter (a `---`-delimited
+block at the top of the file) and excludes it from output, so
+contributors who want lifecycle metadata alongside the prose
+(`status: open|resolved|...`, `tags`, etc.) can keep it
+without a stray horizontal rule on the rendered page.
 
 ## Read first, deploy second
 

@@ -252,7 +252,8 @@ func loadEssays(dir string) []essayEntry {
 }
 
 // extractTitle returns the first "# " heading in the file, or
-// "" if none is present in the first ~10 lines.
+// "" if none is present in the first ~10 lines past any
+// optional YAML front-matter block.
 func extractTitle(path string) string {
 	f, err := os.Open(path)
 	if err != nil {
@@ -260,9 +261,24 @@ func extractTitle(path string) string {
 	}
 	defer f.Close()
 	scanner := bufio.NewScanner(f)
+	inFrontMatter := false
+	sawFirstLine := false
 	lines := 0
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
+		if !sawFirstLine {
+			sawFirstLine = true
+			if line == "---" {
+				inFrontMatter = true
+				continue
+			}
+		}
+		if inFrontMatter {
+			if line == "---" {
+				inFrontMatter = false
+			}
+			continue
+		}
 		if strings.HasPrefix(line, "# ") {
 			return strings.TrimSpace(strings.TrimPrefix(line, "# "))
 		}
