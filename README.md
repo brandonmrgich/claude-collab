@@ -34,6 +34,12 @@ the canonical list — only what's on disk is linked here.
   crossed below the interrupt-flow threshold at once;
   workflows that used to be foreclosed are now routine;
   re-evaluate what you flinch at as "too much work"
+- [Derive, Don't Delegate](essays/derive_dont_delegate.md) —
+  when you delegate an answer you already own, you buy a new
+  failure mode, a new timing concern, and a harder test story
+- [Confident Code, Confident Prose](essays/confident_code_confident_prose.md)
+  — hedged code and hedged prose fail in the same way: a layer
+  between what the author knows and what the artifact says
 
 ## Directory convention
 

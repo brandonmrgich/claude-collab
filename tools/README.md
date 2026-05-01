@@ -1,25 +1,19 @@
 # tools
 
-> **IN TRANSITION (2026-04-29):** The tools model is being
-> revised. Agent workflow tools will be built here canonically
-> (not copied in from other projects). Skip this directory
-> until the transition is complete — do not add new tools as
-> snapshots from angry-gopher.
+General-purpose scripts and small utilities. Two kinds of
+tools live here:
 
-General-purpose scripts and small utilities pulled from
-project-specific repos. The convention here is **snapshot, not
-import**:
+- **Snapshots from other projects** — source-of-truth lives in
+  the originating project (today, mostly `angry-gopher`); the
+  version here is a copy. No two-way sync. If you find one
+  useful, copy it into your own project and adapt freely.
+- **Canonically-here tools** — tools written specifically to
+  support work in `claude-collab` itself (essay tooling, plan-
+  executor instrumentation). Source-of-truth lives here.
 
-- Each tool's source-of-truth lives in the project where it was
-  written (today, mostly `angry-gopher`). The version in this
-  directory is a copy.
-- No two-way sync. If you find a tool in here useful, copy it
-  into your own project and adapt freely. Improvements made
-  downstream don't flow back automatically; they flow back
-  through conversation, if at all.
-- Each tool gets its own subdirectory and its own `README.md`.
-  The README explains what the tool does, when to use it, and
-  what it doesn't do. The actual source files live alongside.
+Each non-trivial tool gets its own subdirectory and its own
+`README.md`. The READMEs explain what the tool does, when to
+use it, and what it doesn't do.
 
 The point is to make it cheap for another Claude (or another
 human) to find a useful tool, understand it, and adapt it —
@@ -28,14 +22,23 @@ get there.
 
 ## What's here
 
-- **`reorg/`** — language-aware batch package mover for Go and
-  Elm. Reads a script of `mv` / `elm-mv` lines and rewrites
-  imports, module declarations, and qualified references across
-  the codebase before moving the directories. Dry-run by
-  default; `--execute` applies. Was the load-bearing tool for
-  several major rename passes in `angry-gopher` (Go reorg into
-  `games/`, Elm `LynRummy → Game` rename). Source: cloned from
-  `angry-gopher/cmd/reorg/`.
+- **`reorg/`** *(snapshot)* — language-aware batch package
+  mover for Go and Elm. Reads a script of `mv` / `elm-mv` lines
+  and rewrites imports, module declarations, and qualified
+  references across the codebase before moving the directories.
+  Dry-run by default; `--execute` applies. Was the load-bearing
+  tool for several major rename passes in `angry-gopher` (Go
+  reorg into `games/`, Elm `LynRummy → Game` rename). Source:
+  cloned from `angry-gopher/cmd/reorg/`.
+- **`analyze_ifs/`** *(canonical)* — extracts and ranks IF
+  entries (`I could have done this more easily IF...`) from
+  `.claude/plan-executor.log`, classifying them by gap type
+  (spinup-brief, tooling, task-spec) and surfacing the spinup
+  briefs most due for refresh.
+- **`show_comments.py`** *(canonical)* — renders an essay file
+  with its inline `.comments.json` sidecar interleaved as quoted
+  reader notes. Used to read essay-surface replies in plain
+  text without the browser. Single-file tool; no subdirectory.
 
 ## Why "snapshot, not import"?
 
