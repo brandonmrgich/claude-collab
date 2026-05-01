@@ -35,6 +35,13 @@ get there.
   `.claude/plan-executor.log`, classifying them by gap type
   (spinup-brief, tooling, task-spec) and surfacing the spinup
   briefs most due for refresh.
+- **`dispatch/`** *(canonical)* — sub-agent dispatch DSL.
+  `dispatch.py` emits a structured prompt with required slots
+  enforced (recent-churn anchor, task brief, mandatory IF in
+  the report-back contract); `parse_return.py` extracts the
+  structured fields from a sub-agent's reply and exits non-zero
+  if the IF is missing. Encodes what used to live as separate
+  prose orchestrator-discipline rules.
 - **`show_comments.py`** *(canonical)* — renders an essay file
   with its inline `.comments.json` sidecar interleaved as quoted
   reader notes. Used to read essay-surface replies in plain
