@@ -64,7 +64,7 @@ def compose_dispatch(*, task, churn, files=None, conformance=False):
         blocks.append(CONFORMANCE_TEMPLATE)
         blocks.append("")
 
-    blocks.append("## Bash discipline")
+    blocks.append(DISPATCH_SECTIONS["bash_discipline"])
     blocks.append(BASH_DISCIPLINE_TEMPLATE)
     blocks.append("")
 

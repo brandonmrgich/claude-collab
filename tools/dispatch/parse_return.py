@@ -23,11 +23,6 @@ import sys
 from dispatch_dsl import RETURN_FIELDS, RETURN_REQUIRED
 
 
-def _strip_marker(line):
-    """Strip a leading bullet/dash from a field line."""
-    return re.sub(r"^\s*[-*]\s*", "", line)
-
-
 def parse_return(text):
     """Extract structured fields from a sub-agent's reply.
 
@@ -49,17 +44,14 @@ def parse_return(text):
             fields[current_key] = "\n".join(current_buf).strip()
 
     for raw_line in text.splitlines():
-        line = _strip_marker(raw_line) if False else raw_line
-        m = field_re.match(line)
+        m = field_re.match(raw_line)
         if m:
             flush()
             label = m.group(1)
-            current_key = field_labels[label.title() if label.title() in field_labels else label]
-            # Case-insensitive label match: find the right key
-            for lbl, key in field_labels.items():
-                if lbl.lower() == label.lower():
-                    current_key = key
-                    break
+            current_key = next(
+                key for lbl, key in field_labels.items()
+                if lbl.lower() == label.lower()
+            )
             current_buf = [m.group(2).strip()] if m.group(2).strip() else []
         else:
             if current_key is not None:

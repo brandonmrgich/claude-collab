@@ -27,6 +27,7 @@ DISPATCH_SECTIONS = {
     "task": "## Task",
     "files": "## Files in scope",
     "conformance": "## Validation requirement",
+    "bash_discipline": "## Bash discipline",
     "report_back": "## Report-back contract",
 }
 
@@ -74,7 +75,10 @@ human as a permission prompt; needless prompts are spam):**
 - Do NOT chain commands with `&&` or `;` when a single command would
   do. One command per Bash call.
 - Use `Read` for reading files, `Grep` for searching — NOT `cat`,
-  `head`, `tail`, `sed`, `awk`. Those all hit the same approval gate
-  and are slower for the human to review.
+  `head`, `tail`, `sed`, `awk`. Reason: Read and Grep are the
+  documented file-access tools; the harness's permissions are tuned
+  to them, and free-form bash text-processing tends to grow into
+  ad-hoc one-liners (`cat X | grep Y | sed Z`) that drift away from
+  the documented surface.
 - Keep commands minimal. Every flag, every redirect, every pipe is
   another thing the human has to scan."""
