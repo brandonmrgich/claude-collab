@@ -29,6 +29,7 @@ from dispatch_dsl import (
     DISPATCH_REQUIRED,
     REPORT_BACK_TEMPLATE,
     CONFORMANCE_TEMPLATE,
+    BASH_DISCIPLINE_TEMPLATE,
 )
 
 
@@ -62,6 +63,10 @@ def compose_dispatch(*, task, churn, files=None, conformance=False):
         blocks.append(DISPATCH_SECTIONS["conformance"])
         blocks.append(CONFORMANCE_TEMPLATE)
         blocks.append("")
+
+    blocks.append("## Bash discipline")
+    blocks.append(BASH_DISCIPLINE_TEMPLATE)
+    blocks.append("")
 
     blocks.append(DISPATCH_SECTIONS["report_back"])
     blocks.append(REPORT_BACK_TEMPLATE)

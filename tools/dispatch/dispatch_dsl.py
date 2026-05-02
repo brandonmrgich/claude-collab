@@ -61,3 +61,20 @@ CONFORMANCE_TEMPLATE = """\
 After implementation, run `ops/check-conformance` from the repo root
 and include the green/red result in the Validation field. Do not
 report success without running it."""
+
+BASH_DISCIPLINE_TEMPLATE = """\
+**Bash discipline (strict — every command you run lands in front of the
+human as a permission prompt; needless prompts are spam):**
+
+- Do NOT prefix commands with `cd <dir> && ...`. The cwd is already
+  set; chained `cd` triggers an extra approval gate. If you genuinely
+  need to run from a different dir, use the tool that supports it
+  (`git -C <dir>`, `python -C ...`, etc.) — but in nearly all cases
+  the cwd is already correct.
+- Do NOT chain commands with `&&` or `;` when a single command would
+  do. One command per Bash call.
+- Use `Read` for reading files, `Grep` for searching — NOT `cat`,
+  `head`, `tail`, `sed`, `awk`. Those all hit the same approval gate
+  and are slower for the human to review.
+- Keep commands minimal. Every flag, every redirect, every pipe is
+  another thing the human has to scan."""
