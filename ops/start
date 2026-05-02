@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# ops/start — (re)start the claude-collab essay server on port 9100.
+#
+# Stops any process currently bound to 9100, builds the server,
+# launches it in the background, and tails a log line so the
+# caller can confirm it came up.
+#
+# Usage:
+#   ops/start                  # restart on default port (9100)
+#
+# Run from anywhere — the script resolves its own directory.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(dirname "$SCRIPT_DIR")"
+SERVER_DIR="$REPO_ROOT/server"
+LOG_FILE="$REPO_ROOT/ops/server.log"
+PORT=9100
+
+# Stop any incumbent on the port.
+EXISTING_PID="$(lsof -i :$PORT -t 2>/dev/null || true)"
+if [[ -n "$EXISTING_PID" ]]; then
+    echo "stopping existing server (pid $EXISTING_PID)..."
+    kill "$EXISTING_PID"
+    # Give it a moment to release the port.
+    for _ in 1 2 3 4 5; do
+        sleep 0.2
+        if ! lsof -i :$PORT -t >/dev/null 2>&1; then
+            break
+        fi
+    done
+fi
+
+echo "building server..."
+(cd "$SERVER_DIR" && go build -o ./server .)
+
+echo "starting server on port $PORT (logs: $LOG_FILE)..."
+cd "$SERVER_DIR"
+nohup ./server > "$LOG_FILE" 2>&1 &
+NEW_PID=$!
+
+# Wait briefly and confirm it bound.
+sleep 0.5
+if lsof -i :$PORT -t | grep -q "$NEW_PID"; then
+    echo "server up: pid $NEW_PID, http://localhost:$PORT"
+else
+    echo "server failed to start; tail of log:" >&2
+    tail -20 "$LOG_FILE" >&2
+    exit 1
+fi

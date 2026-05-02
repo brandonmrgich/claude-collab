@@ -1,3 +1,4 @@
 server/server
 __pycache__/
 *.pyc
+ops/server.log

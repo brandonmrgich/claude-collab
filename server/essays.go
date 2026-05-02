@@ -119,10 +119,43 @@ func HandleSteveRootList(w http.ResponseWriter, r *http.Request) {
 		sortByModTimeDesc)
 }
 
-// HandleSteveRootView serves /steve/<name>.md.
+// HandleSteveRootView serves:
+//
+//	/steve/<name>.md            → render flat note from claude-steve/
+//	/steve/<subdir>/            → list *.md files in claude-steve/<subdir>/
+//	/steve/<subdir>/<name>.md   → render that file
+//
+// <subdir> must be a simple identifier (same rule as
+// `/users/steve/<subdir>/`).
 func HandleSteveRootView(w http.ResponseWriter, r *http.Request) {
-	name := strings.TrimPrefix(r.URL.Path, "/steve/")
-	renderView(w, r, SteveRootDir, "/steve", name, true)
+	rest := strings.TrimPrefix(r.URL.Path, "/steve/")
+	parts := strings.SplitN(rest, "/", 2)
+
+	// Flat-file case: no slash, render directly from claude-steve/.
+	if len(parts) == 1 {
+		renderView(w, r, SteveRootDir, "/steve", parts[0], true)
+		return
+	}
+
+	// Subdir case: validate, look up, list-or-view.
+	subdir := parts[0]
+	if !isValidSteveSubdir(subdir) {
+		http.Error(w, "Invalid subdir", http.StatusBadRequest)
+		return
+	}
+	dir := filepath.Join(SteveRootDir, subdir)
+	if info, err := os.Stat(dir); err != nil || !info.IsDir() {
+		http.Error(w, "Subdir not found: "+subdir, http.StatusNotFound)
+		return
+	}
+	urlPrefix := "/steve/" + subdir
+	if parts[1] == "" {
+		renderList(w, dir, urlPrefix, "Steve — "+subdir,
+			"Working notes in claude-steve/"+subdir+"/.",
+			sortByModTimeDesc)
+		return
+	}
+	renderView(w, r, dir, urlPrefix, parts[1], true)
 }
 
 func isValidSteveSubdir(s string) bool {

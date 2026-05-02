@@ -31,11 +31,12 @@ type articleCommentFile struct {
 
 // resolveArticlePath accepts the full URL path of an essay
 // and returns the filesystem path, refusing traversal
-// attempts. Three shapes:
+// attempts. Four shapes:
 //
 //	/essays/<name>.md
 //	/users/steve/<subdir>/<name>.md
 //	/steve/<name>.md
+//	/steve/<subdir>/<name>.md
 func resolveArticlePath(article string) (string, bool) {
 	var dir, name string
 	switch {
@@ -43,8 +44,19 @@ func resolveArticlePath(article string) (string, bool) {
 		dir = EssaysDir
 		name = strings.TrimPrefix(article, "/essays/")
 	case strings.HasPrefix(article, "/steve/"):
-		dir = SteveRootDir
-		name = strings.TrimPrefix(article, "/steve/")
+		rest := strings.TrimPrefix(article, "/steve/")
+		parts := strings.SplitN(rest, "/", 2)
+		if len(parts) == 1 {
+			dir = SteveRootDir
+			name = parts[0]
+		} else {
+			subdir := parts[0]
+			if !isValidSteveSubdir(subdir) {
+				return "", false
+			}
+			dir = filepath.Join(SteveRootDir, subdir)
+			name = parts[1]
+		}
 	case strings.HasPrefix(article, "/users/steve/"):
 		rest := strings.TrimPrefix(article, "/users/steve/")
 		parts := strings.SplitN(rest, "/", 2)
